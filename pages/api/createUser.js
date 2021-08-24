@@ -12,13 +12,9 @@ export default async function createUser(req, res) {
     passwordConfirm: req.body.passwordConfirm,
   });
 
-  const token = jwt.sign(
-    { id: newUser._id },
-    "my-extra-ultra-undefeatable-extra-extra-long-string",
-    {
-      expiresIn: "90d",
-    }
-  );
+  const token = jwt.sign({ id: newUser._id }, process.env.SECRET, {
+    expiresIn: process.env.EXPIRES_IN,
+  });
 
   res.status(201).json({
     status: "success",

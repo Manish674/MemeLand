@@ -11,12 +11,10 @@ const SignIn = () => {
 
   const handleOnChange = (e) => {
     setLoginDetail({ ...loginDetail, [e.target.name]: e.target.value });
-    console.log(loginDetail);
   };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(loginDetail);
     const promise = await fetch("../api/createUser", {
       method: "post",
       headers: {
@@ -29,7 +27,7 @@ const SignIn = () => {
         passwordConfirm: loginDetail.passwordConfirm,
       }),
     });
-    // console.log(promise);
+
     setLoginDetail({
       ...loginDetail,
       name: "",
