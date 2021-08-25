@@ -11,8 +11,7 @@ export default async function getPeople(req, res) {
 
   if (!user || !(await user.correctPassword(password, user.password))) {
     // TODO: Add error handler
-    console.log("Something is wrong");
-    return;
+    throw new Error("Password or Email is not valid ");
   }
 
   // to confirm the user
