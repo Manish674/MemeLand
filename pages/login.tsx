@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import headerImg from "../public/headerImg.png";
 import styles from "../styles/Home.module.css";
-import SignUp from "../components/SignUp";
+import Login from "../components/Login";
 
 const Home: NextPage = () => {
   return (
@@ -14,7 +14,7 @@ const Home: NextPage = () => {
           width="100"
         />
       </div>
-      <SignUp />
+      <Login />
     </div>
   );
 };
