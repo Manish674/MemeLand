@@ -1,0 +1,15 @@
+.container {
+  height: 100vh;
+}
+
+.header {
+
+}
+
+.navigation {
+}
+
+.navWrapper {
+  display: flex;
+  flex-direction: column;
+}
