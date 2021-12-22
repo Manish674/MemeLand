@@ -18,11 +18,11 @@ const SignUp: FC = () => {
     password: "",
   });
 
-  // useEffect(() => {
-  //   if (cookieCutter.get('username')) {
-  //     Router.push('/home')
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (cookieCutter.get('username')) {
+      Router.push('/home')
+    }
+  }, [document.cookie])
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -43,10 +43,10 @@ const SignUp: FC = () => {
     }).then((r) => r.json())
 
     const decoded:cUser = jwt_decode(response.token);
-    console.log(decoded);
 
-    // cookieCutter.set('username', decoded.username);
-    // cookieCutter.set('email', decoded.email);
+    // Storing username and email in cookie
+    cookieCutter.set('username', decoded.username);
+    cookieCutter.set('email', decoded.email);
 
     setUser({
       email: "",

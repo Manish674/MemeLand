@@ -17,7 +17,18 @@
   display: none;
 }
 
+.titleImg {
+  display: none;
+}
+
 @media (min-width: 1024px) {
+  .titleImg {
+    display: inline-flex;
+    position: absolute;
+    left: 35%;
+    top: 2rem;
+  }
+
   .container {
     display: flex;
   }

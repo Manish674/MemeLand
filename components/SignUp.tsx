@@ -12,11 +12,11 @@ const SignUp: FC = () => {
     passwordConfirm: "",
   });
 
-  // useEffect(() => {
-  //   if (cookieCutter.get('username')) {
-  //     Router.push('/home')
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (cookieCutter.get('username')) {
+      Router.push('/home')
+    }
+  }, [])
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -36,7 +36,6 @@ const SignUp: FC = () => {
       }),
     });
 
-    console.log(response.json());
 
     setUser({
       username: "",

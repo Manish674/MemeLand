@@ -57,4 +57,9 @@
     margin: 0;
   }
 
+  .heading {
+    text-align: center;
+    font-size: 3rem;
+  }
+
 }

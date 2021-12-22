@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import cookieCutter from "cookie-cutter";
+import Sidebar from "../components/Sidebar";
 
 interface user {
   username: string,
@@ -16,12 +17,10 @@ const Home:FC = () => {
     setDetail({'email': email, 'username': username })
   }, [])
 
-  console.log(detail)
-
   return (
-    <p>
-      Hello world
-    </p>
+    <div>
+      <Sidebar />
+    </div>
   )
 }
 
