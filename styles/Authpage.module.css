@@ -46,3 +46,15 @@
   background: none;
   color: var(--text-color);
 }
+
+@media (min-width: 1024px) {
+  .container {
+    justify-content: center;
+  }
+
+  .form {
+    width: 30vw;
+    margin: 0;
+  }
+
+}

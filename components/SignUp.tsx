@@ -1,4 +1,6 @@
-import { FC, useState } from "react";
+import cookieCutter from "cookie-cutter";
+import Router from "next/router";
+import { FC, useState ,useEffect } from "react";
 import styles from "../styles/Authpage.module.css";
 import Link from "next/link";
 
@@ -10,14 +12,21 @@ const SignUp: FC = () => {
     passwordConfirm: "",
   });
 
+  // useEffect(() => {
+  //   if (cookieCutter.get('username')) {
+  //     Router.push('/home')
+  //   }
+  // }, [])
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleOnSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const uri = "http://localhost:8080/api/v1/register"
 
-    await fetch("https://localhost:8080/api/v1/login", {
+    const response = await fetch(uri, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,6 +35,8 @@ const SignUp: FC = () => {
         user,
       }),
     });
+
+    console.log(response.json());
 
     setUser({
       username: "",
