@@ -1,6 +1,9 @@
 import styles from "../styles/Sidebar.module.css";
 import Link from "next/link";
 import headerImg from "../public/headerImg.png";
+import {BsBookmark} from "react-icons/bs"
+
+import {FiSend} from "react-icons/fi";
 
 const Sidebar = () => {
   return (
@@ -10,14 +13,25 @@ const Sidebar = () => {
       </div>
       <div className={styles.navigation}>
         <div className={styles.navWrapper}>
-          <Link href="/">
-            Account
+          <Link href="/" >
+            <div className={styles.linkItemWrapper}>
+              <img className={styles.linkPfp} />
+              Account
+            </div>
           </Link>
-          <Link href="/">
-            Post
-          </Link>
-          <Link href="/">
-            Favourites
+
+          <button className={styles.postButton}>
+            <div className={styles.linkItemWrapper}>
+              <FiSend className={styles.linkIcon}/>
+              <span className={styles.buttonText}>Post</span>
+            </div>
+          </button>
+
+          <Link href="/" passHref={true}>
+            <div className={styles.linkItemWrapper}>
+              <BsBookmark className={styles.linkIcon} />
+              Favourites
+            </div>
           </Link>
         </div>
       </div>
