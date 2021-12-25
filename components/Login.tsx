@@ -19,10 +19,13 @@ const SignUp: FC = () => {
   });
 
   useEffect(() => {
-    if (cookieCutter.get('username')) {
+    let name = cookieCutter.get('username')
+    let email = cookieCutter.get('email')
+
+    if (name && email) {
       Router.push('/home')
     }
-  }, [document.cookie])
+  }, [])
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -32,21 +35,25 @@ const SignUp: FC = () => {
     e.preventDefault();
     const uri = "http://localhost:8080/api/v1/login"
 
-    const response = await fetch(uri, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user,
-      }),
-    }).then((r) => r.json())
+    try {
+      const response = await fetch(uri, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user,
+        }),
+      }).then((r) => r.json())
 
-    const decoded:cUser = jwt_decode(response.token);
+      const decoded:cUser = jwt_decode(response.token);
 
-    // Storing username and email in cookie
-    cookieCutter.set('username', decoded.username);
-    cookieCutter.set('email', decoded.email);
+      // Storing username and email in cookie
+      cookieCutter.set('username', decoded.username);
+      cookieCutter.set('email', decoded.email);
+    } catch (e) {
+      console.log(e)
+    }
 
     setUser({
       email: "",
