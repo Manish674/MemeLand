@@ -16,7 +16,7 @@ const Sidebar = () => {
           <Link href="/" >
             <div className={styles.linkItemWrapper}>
               <img className={styles.linkPfp} />
-              Account
+              <span className={styles.linkTxt}>Account</span>
             </div>
           </Link>
 
@@ -30,7 +30,7 @@ const Sidebar = () => {
           <Link href="/" passHref={true}>
             <div className={styles.linkItemWrapper}>
               <BsBookmark className={styles.linkIcon} />
-              Favourites
+              <span className={styles.linkTxt}>Favourites</span>
             </div>
           </Link>
         </div>
