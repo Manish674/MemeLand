@@ -1,13 +1,19 @@
-import type { NextPage } from "next";
-import headerImgLGScreen from "../public/headerImgLGScreen.png";
-import headerImg from "../public/headerImg.png";
-import titleImg from "../public/title.png";
-import styles from "../styles/Home.module.css";
-import SignUp from "../components/SignUp";
+import Router from "next/router";
+import type { NextPage } from 'next';
+import headerImgLGScreen from '../public/headerImgLGScreen.png';
+import headerImg from '../public/headerImg.png';
+import titleImg from '../public/title.png';
+import styles from '../styles/Home.module.css';
+import SignUp from '../components/SignUp';
+import { useEffect } from 'react';
 
 //TODO make a better approach for jwt token
 
-const Home: NextPage = () => {
+const Home: NextPage = (props: any) => {
+  useEffect(() => {
+    if (props.isLoggedIn)  Router.push('/home')
+  }, [])
+
   return (
     <>
       <div className={styles.titleImg}>
@@ -21,11 +27,7 @@ const Home: NextPage = () => {
             alt="header.png"
             // width="100"
           />
-          <img
-            className={styles.img}
-            src={headerImg.src}
-            alt="header.png"
-          />
+          <img className={styles.img} src={headerImg.src} alt="header.png" />
         </div>
         <SignUp />
       </div>
@@ -34,3 +36,14 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context: any) {
+  const token = context.req.cookie;
+
+  if (token !== '') return { props: { isLoggedIn: true } };
+  if (token === '') return { props: { isLoggedIn: false } };
+
+  return {
+    props: {},
+  };
+}

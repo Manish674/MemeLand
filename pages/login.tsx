@@ -1,9 +1,9 @@
-import type { NextPage } from "next";
-import headerImg from "../public/headerImg.png";
-import styles from "../styles/Home.module.css";
-import Login from "../components/Login";
-import headerImgLGScreen from "../public/headerImgLGScreen.png";
-import titleImg from "../public/title.png";
+import type { NextPage } from 'next';
+import headerImg from '../public/headerImg.png';
+import styles from '../styles/Home.module.css';
+import Login from '../components/Login';
+import headerImgLGScreen from '../public/headerImgLGScreen.png';
+import titleImg from '../public/title.png';
 
 const Home: NextPage = () => {
   return (
@@ -33,3 +33,10 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context) {
+  console.log(document.cookie);
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}

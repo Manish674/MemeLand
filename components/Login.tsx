@@ -1,66 +1,40 @@
-import cookieCutter from "cookie-cutter";
-import Router from "next/router";
-import jwt_decode from "jwt-decode";
-import Link from "next/link";
-import { FC, useState, ChangeEvent, SyntheticEvent, useEffect } from "react";
-import styles from "../styles/Authpage.module.css";
-
-interface cUser {
-  username: string,
-  email: string,
-  iat: number;
-  exp: number
-} 
+// import cookieCutter from "cookie-cutter";
+// import Router from "next/router";
+// import jwt_decode from "jwt-decode";
+// import axios from '../utils/axios';
+import axios from 'axios';
+import Link from 'next/link';
+import { FC, useState, ChangeEvent } from 'react';
+import styles from '../styles/Authpage.module.css';
 
 const SignUp: FC = () => {
   const [user, setUser] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-
-  useEffect(() => {
-    let name = cookieCutter.get('username')
-    let email = cookieCutter.get('email')
-
-    if (name && email) {
-      Router.push('/home')
-    }
-  }, [])
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleOnSubmit = async (e: SyntheticEvent) => {
+  const handleOnSubmit = async (e: any) => {
     e.preventDefault();
-    const uri = "http://localhost:8080/api/v1/login"
+    const { email, password } = user;
 
-    try {
-      const response = await fetch(uri, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user,
-        }),
-      }).then((r) => r.json())
+    if (!email || !password) return console.log('pls provide valid details');
 
-      const decoded:cUser = jwt_decode(response.token);
-
-      // Storing username and email in cookie
-      cookieCutter.set('username', decoded.username);
-      cookieCutter.set('email', decoded.email);
-    } catch (e) {
-      console.log(e)
-    }
-
-    setUser({
-      email: "",
-      password: ""  
+    // TODO work on the login functionality
+    const data = axios({
+      method: 'POST',
+      url: 'https://localhost:4000/api/v1/auth/login',
+      data: {
+        email,
+        password,
+      },
     })
+      .catch((err: any) => console.log(err))
+      .then((res) => console.log(res));
   };
-
 
   return (
     <div className={styles.container}>
@@ -71,11 +45,14 @@ const SignUp: FC = () => {
           name="email"
           placeholder="email"
           value={user.email}
+          autoComplete="false"
           onChange={(e) => handleOnChange(e)}
         />
         <input
           className={styles.input}
+          autoComplete="false"
           name="password"
+          type="password"
           placeholder="password"
           value={user.password}
           onChange={(e) => handleOnChange(e)}

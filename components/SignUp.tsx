@@ -1,22 +1,20 @@
-import cookieCutter from "cookie-cutter";
-import Router from "next/router";
-import { FC, useState ,useEffect } from "react";
-import styles from "../styles/Authpage.module.css";
-import Link from "next/link";
+// import cookieCutter from "cookie-cutter";
+// import Router from "next/router";
+import axios from '../utils/axios';
+import { FC, useState, useEffect } from 'react';
+import styles from '../styles/Authpage.module.css';
+import Link from 'next/link';
 
-const SignUp: FC = () => {
+const SignUp: FC = (props) => {
+  console.log('this is from react component', props);
   const [user, setUser] = useState({
-    username: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
   });
 
-  useEffect(() => {
-    if (cookieCutter.get('username')) {
-      Router.push('/home')
-    }
-  }, [])
+  useEffect(() => {}, []);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -24,25 +22,30 @@ const SignUp: FC = () => {
 
   const handleOnSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const uri = "http://localhost:8080/api/v1/register"
 
-    const response = await fetch(uri, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user,
-      }),
-    });
+    const { email, username, password, passwordConfirm } = user;
 
+    if (!username || !email) return console.log('pls provide with all details');
+    if (password !== passwordConfirm)
+      return console.log('passwords are not same');
 
-    setUser({
-      username: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-    });
+    try {
+      const response: any = await axios({
+        method: 'POST',
+        url: '/auth/register',
+        data: {
+          username,
+          email,
+          password,
+        },
+      });
+
+      const { data } = response;
+      document.cookie = data.token;
+    } catch (e) {
+      console.log('error happened');
+      console.log(e);
+    }
   };
 
   return (
@@ -68,6 +71,7 @@ const SignUp: FC = () => {
           name="password"
           placeholder="password"
           value={user.password}
+          type="password"
           onChange={(e) => handleOnChange(e)}
         />
         <input
@@ -75,6 +79,7 @@ const SignUp: FC = () => {
           name="passwordConfirm"
           placeholder="confirm password"
           value={user.passwordConfirm}
+          type="password"
           onChange={(e) => handleOnChange(e)}
         />
         <button className={styles.primary_btn}>Sign Up</button>
