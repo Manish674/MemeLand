@@ -1,4 +1,4 @@
-import Router from "next/router";
+import Router from 'next/router';
 import type { NextPage } from 'next';
 import headerImgLGScreen from '../public/headerImgLGScreen.png';
 import headerImg from '../public/headerImg.png';
@@ -9,11 +9,7 @@ import { useEffect } from 'react';
 
 //TODO make a better approach for jwt token
 
-const Home: NextPage = (props: any) => {
-  useEffect(() => {
-    if (props.isLoggedIn)  Router.push('/home')
-  }, [])
-
+const Home: NextPage = () => {
   return (
     <>
       <div className={styles.titleImg}>
@@ -36,14 +32,3 @@ const Home: NextPage = (props: any) => {
 };
 
 export default Home;
-
-export async function getServerSideProps(context: any) {
-  const token = context.req.cookie;
-
-  if (token !== '') return { props: { isLoggedIn: true } };
-  if (token === '') return { props: { isLoggedIn: false } };
-
-  return {
-    props: {},
-  };
-}
