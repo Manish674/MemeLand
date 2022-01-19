@@ -1,18 +1,31 @@
-import { FC, useState } from 'react';
+import { FC, useEffect } from 'react';
 import WithAuth from '../utils/withAuth';
 import Sidebar from '../components/Sidebar';
 import CreatePost from '../components/CreatePost';
-
-interface user {
-  username: string;
-  email: string;
-}
+import axios from '../utils/axios';
 
 const Home: FC = () => {
-  const [detail, setDetail] = useState<user>({
-    username: '',
-    email: '',
-  });
+  useEffect(() => {
+    checkValidation();
+  }, []);
+
+  const checkValidation = async () => {
+    try {
+      const token = document.cookie;
+      if (!token) return;
+
+      const { data } = await axios({
+        url: 'auth/validate',
+        headers: {
+          authentication: `Bearer ${token}`,
+        },
+      });
+      // TODO Do it in context or it's time to find a good state management liberary
+      const { username, email } = data.user;
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div>

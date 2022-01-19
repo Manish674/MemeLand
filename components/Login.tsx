@@ -1,6 +1,3 @@
-// import cookieCutter from "cookie-cutter";
-// import Router from "next/router";
-// import jwt_decode from "jwt-decode";
 import axios from '../utils/axios';
 import Link from 'next/link';
 import { FC, useState, ChangeEvent, useEffect } from 'react';
@@ -10,11 +7,13 @@ import styles from '../styles/Authpage.module.css';
 const SignUp: FC = () => {
   const Router = useRouter();
 
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+
   useEffect(() => {
     if (document.cookie) {
       Router.push('/home');
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const [user, setUser] = useState({
     email: '',
@@ -31,7 +30,6 @@ const SignUp: FC = () => {
 
     if (!email || !password) return console.log('pls provide valid details');
 
-    console.log(document.cookie);
     // TODO work on the login functionality
     try {
       const { data } = await axios({
@@ -43,10 +41,11 @@ const SignUp: FC = () => {
         },
       });
 
-      console.log(data);
-      // if (data.isVerified) {
-      //   document.cookie = data.token;
-      // }
+      if (data.data.isVerified) {
+        console.log('verified');
+        document.cookie = data.data.token;
+        setisLoggedIn(true);
+      }
     } catch (e: any) {
       alert(e.message);
     }
