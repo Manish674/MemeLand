@@ -33,10 +33,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-export async function getServerSideProps(context) {
-  console.log(document.cookie);
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}

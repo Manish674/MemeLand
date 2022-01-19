@@ -6,7 +6,6 @@ import styles from '../styles/Authpage.module.css';
 import Link from 'next/link';
 
 const SignUp: FC = (props) => {
-  console.log('this is from react component', props);
   const [user, setUser] = useState({
     username: '',
     email: '',

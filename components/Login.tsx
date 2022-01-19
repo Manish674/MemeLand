@@ -1,13 +1,21 @@
 // import cookieCutter from "cookie-cutter";
 // import Router from "next/router";
 // import jwt_decode from "jwt-decode";
-// import axios from '../utils/axios';
-import axios from 'axios';
+import axios from '../utils/axios';
 import Link from 'next/link';
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styles from '../styles/Authpage.module.css';
 
 const SignUp: FC = () => {
+  const Router = useRouter();
+
+  useEffect(() => {
+    if (document.cookie) {
+      Router.push('/home');
+    }
+  }, []);
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -23,17 +31,25 @@ const SignUp: FC = () => {
 
     if (!email || !password) return console.log('pls provide valid details');
 
+    console.log(document.cookie);
     // TODO work on the login functionality
-    const data = axios({
-      method: 'POST',
-      url: 'https://localhost:4000/api/v1/auth/login',
-      data: {
-        email,
-        password,
-      },
-    })
-      .catch((err: any) => console.log(err))
-      .then((res) => console.log(res));
+    try {
+      const { data } = await axios({
+        method: 'POST',
+        url: '/auth/login',
+        data: {
+          email,
+          password,
+        },
+      });
+
+      console.log(data);
+      // if (data.isVerified) {
+      //   document.cookie = data.token;
+      // }
+    } catch (e: any) {
+      alert(e.message);
+    }
   };
 
   return (

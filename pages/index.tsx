@@ -1,15 +1,22 @@
-import Router from 'next/router';
+import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import headerImgLGScreen from '../public/headerImgLGScreen.png';
 import headerImg from '../public/headerImg.png';
 import titleImg from '../public/title.png';
 import styles from '../styles/Home.module.css';
 import SignUp from '../components/SignUp';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 //TODO make a better approach for jwt token
 
 const Home: NextPage = () => {
+  const Router = useRouter();
+  useEffect(() => {
+    if (document.cookie) {
+      Router.push('/home');
+    }
+  });
+
   return (
     <>
       <div className={styles.titleImg}>
