@@ -4,30 +4,41 @@ import { PostContext } from '../utils/postContext';
 import { AiOutlineUpload } from 'react-icons/ai';
 
 const CreatePost = () => {
-  const [media, setMedia] = useState();
-  const [postTitle, setPostTitle] = useState('');
-  const [previewUrl, setPreviewUrl] = useState<any>();
+  const [postDetails, setPostDetails] = useState<any>({
+    title: '',
+    img: {
+      file: '',
+      preview: '',
+    },
+  });
+
   const { hidden, createPost } = useContext<any>(PostContext);
 
   const handleOnChange = (e: any) => {
-    setPostTitle(e.target.value);
+    setPostDetails({ ...postDetails, [e.target.name]: e.target.value });
   };
 
   const handleImgChange = (e: any) => {
-    setMedia(e.target.files[0]);
-    const url = URL.createObjectURL(e.target.files[0]);
-    setPreviewUrl(url);
+    // TODO get clear about what's happening with this onloadend thing
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      console.log(reader.result);
+      setPostDetails({
+        ...postDetails,
+        img: {
+          file: file,
+          preview: reader.result,
+        },
+      });
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
-    const postData = {
-      media,
-      postTitle,
-    };
-    const data = await createPost(postData);
-
-    console.log(data);
   };
 
   return (
@@ -38,11 +49,17 @@ const CreatePost = () => {
           <input
             className={styles.input}
             placeholder="what's happening..."
+            name="title"
+            value={postDetails.title}
             onChange={(e) => handleOnChange(e)}
           />
           <div className={styles.img_preview}>
-            {previewUrl ? (
-              <img className={styles.preview_img} alt="" src={previewUrl} />
+            {postDetails.img.preview ? (
+              <img
+                className={styles.preview_img}
+                alt=""
+                src={postDetails.img.preview}
+              />
             ) : (
               <input
                 type="file"
