@@ -1,13 +1,14 @@
-import styles from '../styles/createpost.module.css';
 import { useContext, useState } from 'react';
-import { PostContext } from '../utils/postContext';
 import { AiOutlineUpload } from 'react-icons/ai';
+import axios from '../utils/axios';
+import { PostContext } from '../utils/postContext';
+import styles from '../styles/createpost.module.css';
 
 const CreatePost = () => {
   const [postDetails, setPostDetails] = useState<any>({
     title: '',
     img: {
-      file: '',
+      file: null,
       preview: '',
     },
   });
@@ -24,7 +25,6 @@ const CreatePost = () => {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      console.log(reader.result);
       setPostDetails({
         ...postDetails,
         img: {
@@ -39,6 +39,22 @@ const CreatePost = () => {
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
+
+    let data = new FormData();
+    data.append('file', postDetails.img.file);
+
+    axios({
+      method: 'POST',
+      url: '/posts/',
+      headers: {
+        Authorization: `Bearer ${document.cookie}`,
+        'Content-Type': 'multipart/form-data',
+      },
+      data: {
+        data,
+        title: postDetails.title,
+      },
+    });
   };
 
   return (
