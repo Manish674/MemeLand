@@ -43,18 +43,23 @@ const CreatePost = () => {
     let data = new FormData();
     data.append('file', postDetails.img.file);
 
-    axios({
-      method: 'POST',
-      url: '/posts/',
+    axios.post('/posts/', data, {
       headers: {
-        Authorization: `Bearer ${document.cookie}`,
         'Content-Type': 'multipart/form-data',
       },
-      data: {
-        data,
-        title: postDetails.title,
-      },
     });
+    // axios({
+    //   method: 'POST',
+    //   url: '/posts/',
+    //   headers: {
+    //     Authorization: `Bearer ${document.cookie}`,
+    //     'Content-Type': 'multipart/form-data',
+    //   },
+    //   data: {
+    //     data,
+    //     title: postDetails.title,
+    //   },
+    // });
   };
 
   return (
@@ -80,6 +85,7 @@ const CreatePost = () => {
               <input
                 type="file"
                 placeholder="upload file here..."
+                name="file"
                 onChange={(e) => handleImgChange(e)}
               />
             )}
