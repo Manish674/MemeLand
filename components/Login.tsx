@@ -6,8 +6,9 @@ import styles from '../styles/Authpage.module.css';
 
 const SignUp: FC = () => {
   const Router = useRouter();
-
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState();
 
   useEffect(() => {
     if (document.cookie) {
@@ -20,6 +21,11 @@ const SignUp: FC = () => {
     password: '',
   });
 
+  const [fieldError, setFieldError] = useState({
+    emailFieldError: '',
+    passwordFieldError: '',
+  });
+
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -28,7 +34,28 @@ const SignUp: FC = () => {
     e.preventDefault();
     const { email, password } = user;
 
-    if (!email || !password) return console.log('pls provide valid details');
+    // if (!email || !password) return console.log('pls provide valid details');
+    if (!email) {
+      setIsError(true);
+      setFieldError({
+        ...fieldError,
+        emailFieldError: 'email field cannot be empty',
+      });
+    }
+
+    if (!password) {
+      setIsError(true);
+      setFieldError({
+        ...fieldError,
+        passwordFieldError: 'password field cannot be empty',
+      });
+    }
+
+    setIsError(false);
+    setFieldError({
+      emailFieldError: '',
+      passwordFieldError: '',
+    });
 
     // TODO work on the login functionality
     try {
@@ -41,7 +68,13 @@ const SignUp: FC = () => {
         },
       });
 
-      if (data.data.isVerified) {
+      if (!data.success) {
+        setIsError(true);
+        setError(data.message);
+        return;
+      }
+
+      if (data.isVerified) {
         console.log('verified');
         document.cookie = data.data.token;
         setisLoggedIn(true);
@@ -55,25 +88,39 @@ const SignUp: FC = () => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={(e) => handleOnSubmit(e)}>
         <h3 className={styles.heading}>Login</h3>
-        <input
-          className={styles.input}
-          name="email"
-          placeholder="email"
-          value={user.email}
-          autoComplete="false"
-          onChange={(e) => handleOnChange(e)}
-        />
-        <input
-          className={styles.input}
-          autoComplete="false"
-          name="password"
-          type="password"
-          placeholder="password"
-          value={user.password}
-          onChange={(e) => handleOnChange(e)}
-        />
+        <div className={styles.inputWrapper}>
+          <input
+            className={`${styles.input} ${
+              isError && fieldError ? styles.errorfield : ''
+            } `}
+            name="email"
+            placeholder="email"
+            value={user.email}
+            autoComplete="false"
+            onChange={(e) => handleOnChange(e)}
+          />
+          <p className={styles.fielderrormsg}>{fieldError.emailFieldError}</p>
+        </div>
+        <div className={styles.inputWrapper}>
+          <input
+            className={`${styles.input} ${
+              isError && fieldError ? styles.errorfield : ''
+            } `}
+            autoComplete="false"
+            name="password"
+            type="password"
+            placeholder="password"
+            value={user.password}
+            onChange={(e) => handleOnChange(e)}
+          />
+          <p className={styles.fielderrormsg}>
+            {fieldError.passwordFieldError}
+          </p>
+        </div>
         <button className={styles.primary_btn}>Login</button>
+        <div className={styles.errormsg}>{error}</div>
       </form>
+
       <div className={styles.secondary_btn}>
         <Link href="/">Sign Up</Link>
       </div>

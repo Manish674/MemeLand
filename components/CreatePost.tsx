@@ -42,6 +42,7 @@ const CreatePost = () => {
 
     let data = new FormData();
     data.append('file', postDetails.img.file);
+    data.append('title', postDetails.title);
 
     axios.post('/posts/', data, {
       headers: {
