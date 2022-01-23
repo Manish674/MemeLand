@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { AiOutlineUpload } from 'react-icons/ai';
+// import { AiOutlineUpload } from 'react-icons/ai';
 import axios from '../utils/axios';
 import { PostContext } from '../utils/postContext';
 import styles from '../styles/createpost.module.css';
@@ -13,7 +13,7 @@ const CreatePost = () => {
     },
   });
 
-  const { hidden, createPost } = useContext<any>(PostContext);
+  const { hidden } = useContext<any>(PostContext);
 
   const handleOnChange = (e: any) => {
     setPostDetails({ ...postDetails, [e.target.name]: e.target.value });
@@ -44,27 +44,34 @@ const CreatePost = () => {
     data.append('file', postDetails.img.file);
     data.append('title', postDetails.title);
 
-    axios.post('/posts/', data, {
+    const response = await axios.post('/posts/', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        Authentication: `Bearer ${document.cookie}`,
       },
     });
+
+    console.log(response.data);
+
     // axios({
     //   method: 'POST',
     //   url: '/posts/',
     //   headers: {
     //     Authorization: `Bearer ${document.cookie}`,
-    //     'Content-Type': 'multipart/form-data',
+    //     'Content-Type': 'application/json',
     //   },
     //   data: {
-    //     data,
     //     title: postDetails.title,
+    //     fileString: postDetails.img.preview,
     //   },
     // });
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={{ display: `${hidden ? 'none' : ''}` }}
+    >
       <h4>Create new post</h4>
       <div className={styles.wrapper}>
         <form className={styles.form} onSubmit={(e) => handleOnSubmit(e)}>

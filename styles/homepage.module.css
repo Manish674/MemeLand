@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+}
+
+.app_view {
+  width: 100%;
+}

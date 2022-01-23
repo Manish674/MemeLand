@@ -75,8 +75,7 @@ const SignUp: FC = () => {
       }
 
       if (data.isVerified) {
-        console.log('verified');
-        document.cookie = data.data.token;
+        document.cookie = data.token;
         setisLoggedIn(true);
       }
     } catch (e: any) {

@@ -3,6 +3,7 @@ import WithAuth from '../utils/withAuth';
 import Sidebar from '../components/Sidebar';
 import CreatePost from '../components/CreatePost';
 import axios from '../utils/axios';
+import styles from '../styles/homepage.module.css';
 
 const Home: FC = () => {
   useEffect(() => {
@@ -28,9 +29,11 @@ const Home: FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Sidebar />
-      <CreatePost />
+      <div className={styles.app_view}>
+        <CreatePost />
+      </div>
     </div>
   );
 };
