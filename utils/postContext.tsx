@@ -6,7 +6,7 @@ const PostContext = createContext(null);
 const PostContextProvider = ({ children }: any) => {
   const [hidden, setHidden] = useState(true);
 
-  const createPost = async (postData) => {
+  const createPost = async (postData: any) => {
     const { data } = await axios({
       method: 'POST',
       url: '/posts/',

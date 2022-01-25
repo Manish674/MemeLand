@@ -95,7 +95,7 @@ const SignUp: FC = () => {
             name="email"
             placeholder="email"
             value={user.email}
-            autoComplete="false"
+            autoComplete="off"
             onChange={(e) => handleOnChange(e)}
           />
           <p className={styles.fielderrormsg}>{fieldError.emailFieldError}</p>
@@ -105,7 +105,7 @@ const SignUp: FC = () => {
             className={`${styles.input} ${
               isError && fieldError ? styles.errorfield : ''
             } `}
-            autoComplete="false"
+            autoComplete="off"
             name="password"
             type="password"
             placeholder="password"

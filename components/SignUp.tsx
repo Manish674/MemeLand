@@ -12,7 +12,9 @@ const SignUp: FC = (props) => {
     password: '',
     passwordConfirm: '',
   });
+
   const [isError, setIsError] = useState(false);
+
   const [fieldError, setFieldError] = useState({
     username: '',
     email: '',
@@ -85,7 +87,6 @@ const SignUp: FC = (props) => {
     }
   };
 
-  console.log(fieldError);
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={(e) => handleOnSubmit(e)}>
@@ -99,6 +100,7 @@ const SignUp: FC = (props) => {
             placeholder="username"
             value={user.username}
             onChange={(e) => handleOnChange(e)}
+            autoComplete="off"
           />
           <p className={styles.fielderrormsg}>{fieldError.username}</p>
         </div>
@@ -111,6 +113,7 @@ const SignUp: FC = (props) => {
             placeholder="email"
             value={user.email}
             onChange={(e) => handleOnChange(e)}
+            autoComplete="off"
           />
 
           <p className={styles.fielderrormsg}>{fieldError.email}</p>
@@ -125,6 +128,7 @@ const SignUp: FC = (props) => {
             value={user.password}
             type="password"
             onChange={(e) => handleOnChange(e)}
+            autoComplete="off"
           />
 
           <p className={styles.fielderrormsg}>{fieldError.password}</p>
@@ -139,6 +143,7 @@ const SignUp: FC = (props) => {
             value={user.passwordConfirm}
             type="password"
             onChange={(e) => handleOnChange(e)}
+            autoComplete="off"
           />
           <p className={styles.fielderrormsg}>{fieldError.passwordConfirm}</p>
         </div>

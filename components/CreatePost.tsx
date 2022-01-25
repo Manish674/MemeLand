@@ -82,6 +82,7 @@ const CreatePost = () => {
             name="title"
             value={postDetails.title}
             onChange={(e) => handleOnChange(e)}
+            autoComplete="off"
           />
           <div className={styles.img_preview}>
             {postDetails.img.preview ? (
