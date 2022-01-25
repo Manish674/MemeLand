@@ -4,7 +4,7 @@ import { createContext, useState } from 'react';
 const PostContext = createContext(null);
 
 const PostContextProvider = ({ children }: any) => {
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   const createPost = async (postData) => {
     const { data } = await axios({

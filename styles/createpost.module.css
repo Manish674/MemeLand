@@ -1,15 +1,17 @@
 .container {
-  position: relative;
-  top: 0;
-  width: 60%;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
   height: 80vh;
   background: black;
-  margin: auto;
-  margin-top: 2rem;
   border-radius: 10px;
   padding: 0.5rem;
-  margin: auto;
-  margin-top: 2rem;
+  z-index: 0;
+  max-width: 826px;
 }
 
 .wrapper {

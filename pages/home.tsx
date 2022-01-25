@@ -1,9 +1,10 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
+import styles from '../styles/homepage.module.css';
 import WithAuth from '../utils/withAuth';
+import axios from '../utils/axios';
 import Sidebar from '../components/Sidebar';
 import CreatePost from '../components/CreatePost';
-import axios from '../utils/axios';
-import styles from '../styles/homepage.module.css';
+import Posts from '../components/Posts';
 
 const Home: FC = () => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const Home: FC = () => {
           authentication: `Bearer ${token}`,
         },
       });
+
       // TODO Do it in context or it's time to find a good state management liberary
       const { username, email } = data.user;
     } catch (e) {
@@ -31,8 +33,9 @@ const Home: FC = () => {
   return (
     <div className={styles.container}>
       <Sidebar />
-      <div className={styles.app_view}>
-        <CreatePost />
+      <CreatePost />
+      <div className={styles.app}>
+        <Posts />
       </div>
     </div>
   );

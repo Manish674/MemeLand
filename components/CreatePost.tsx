@@ -13,6 +13,7 @@ const CreatePost = () => {
     },
   });
 
+  // TODO go learn typescript
   const { hidden } = useContext<any>(PostContext);
 
   const handleOnChange = (e: any) => {
