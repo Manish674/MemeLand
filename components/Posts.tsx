@@ -11,7 +11,7 @@ const Posts = () => {
 
   const fetchPosts = async () => {
     try {
-      const token = document.cookie;
+      const token = document.cookie.split(';')[1].trim();
       if (!token) return;
 
       const { data } = await axios({

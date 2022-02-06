@@ -14,13 +14,16 @@ const Home: FC = () => {
   const { isUserValid } = useContext(AuthContext);
 
   useEffect(() => {
-    const token = document.cookie;
-    validate(token);
+    const token = document.cookie.split(';');
+    validate(token[1]);
   }, []);
 
   const validate = async (token: string) => {
-    const result = await isUserValid(token);
-    if (!result.success) Router.push('/');
+    const result = await isUserValid(token.trim());
+
+    if (!result.success)  {
+      Router.push('/');
+    }
   };
 
   return (

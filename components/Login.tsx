@@ -11,9 +11,9 @@ const SignUp: FC = () => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    if (document.cookie) {
-      Router.push('/home');
-    }
+    const token = document.cookie.split(';');
+    if (token[1]) Router.push('/home');
+
   }, [isLoggedIn]);
 
   const [user, setUser] = useState({
@@ -75,6 +75,7 @@ const SignUp: FC = () => {
       }
 
       if (data.isVerified) {
+        console.log('from Login', data.token);
         document.cookie = data.token;
         setisLoggedIn(true);
       }

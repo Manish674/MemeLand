@@ -1,23 +1,29 @@
 .container {
-  width: 85%;
+  width: 60%;
   /*remove it later */
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* border-radius: 5px; */
-  border: 2px solid white;
   /* remove it later */
-  background: #434343;
+  /* background: #434343; */
   margin-top: 1rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
 }
 
 .imgWrapper {
   height: max-content;
+  display: flex;
+  justify-content: center;
 }
 
 .img {
   width: 100%;
+  /* max-width: 378.55px; */
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 .profile {

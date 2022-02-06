@@ -1,5 +1,3 @@
-// import cookieCutter from "cookie-cutter";
-// import Router from "next/router";
 import axios from '../utils/axios';
 import { FC, useState, useEffect } from 'react';
 import styles from '../styles/Authpage.module.css';
@@ -72,7 +70,7 @@ const SignUp: FC = (props) => {
     if (isError) return;
 
     try {
-      const response: any = await axios({
+      const { data } = await axios({
         method: 'POST',
         url: '/auth/register',
         data: {
@@ -81,6 +79,7 @@ const SignUp: FC = (props) => {
           password,
         },
       });
+      console.log(data);
     } catch (e) {
       console.log('error happened');
       console.log(e);

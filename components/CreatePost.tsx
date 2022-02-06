@@ -48,7 +48,7 @@ const CreatePost = () => {
     const response = await axios.post('/posts/', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        Authentication: `Bearer ${document.cookie}`,
+        Authentication: `Bearer ${document.cookie.split(';')[1].trim()}`,
       },
     });
 

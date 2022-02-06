@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   const Router = useRouter();
   useEffect(() => {
     if (document.cookie) {
-      Router.push('/home');
+      // Router.push('/home');
     }
   });
 
