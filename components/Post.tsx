@@ -8,7 +8,9 @@ const Post = ({ title, mediaUrl }) => {
       <div className={styles.imgWrapper}>
         <img className={styles.img} src={mediaUrl} alt={title} />
       </div>
-      <h4 className={styles.title}>{title}</h4>
+      <div className={styles.textContent}>
+        <h4 className={styles.title}>{title}</h4>
+      </div>
     </div>
   );
 };

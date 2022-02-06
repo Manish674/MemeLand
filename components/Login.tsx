@@ -12,6 +12,7 @@ const SignUp: FC = () => {
 
   useEffect(() => {
     const token = document.cookie.split(';');
+    console.log("from login component useEffect", token[1]);
     if (token[1]) Router.push('/home');
 
   }, [isLoggedIn]);

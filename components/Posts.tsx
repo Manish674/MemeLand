@@ -27,6 +27,9 @@ const Posts = () => {
     }
   };
 
+  // posts.map((data) => console.log(data.posts.username === data.user_id));
+  posts.map((data) => console.log(data.user_id));
+
   return (
     <div>
       {posts.length > 0

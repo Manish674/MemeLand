@@ -12,8 +12,8 @@ import { useRouter } from 'next/router';
 const Home: NextPage = () => {
   const Router = useRouter();
   useEffect(() => {
-    if (document.cookie) {
-      // Router.push('/home');
+    if (document.cookie.split(';')[1]) {
+      Router.push('/home');
     }
   });
 
