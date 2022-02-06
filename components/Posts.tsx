@@ -11,7 +11,7 @@ const Posts = () => {
 
   const fetchPosts = async () => {
     try {
-      const token = document.cookie.split(';')[1].trim();
+      const token = document.cookie;
       if (!token) return;
 
       const { data } = await axios({
@@ -26,9 +26,6 @@ const Posts = () => {
       console.log(e);
     }
   };
-
-  // posts.map((data) => console.log(data.posts.username === data.user_id));
-  posts.map((data) => console.log(data.user_id));
 
   return (
     <div>

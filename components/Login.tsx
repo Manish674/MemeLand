@@ -1,3 +1,4 @@
+// import { getCookie, setCookie } from "../utils/cookie";
 import axios from '../utils/axios';
 import Link from 'next/link';
 import { FC, useState, ChangeEvent, useEffect } from 'react';
@@ -11,10 +12,8 @@ const SignUp: FC = () => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    const token = document.cookie.split(';');
-    console.log("from login component useEffect", token[1]);
-    if (token[1]) Router.push('/home');
-
+    const token = document.cookie;
+    if (token) Router.push('/home');
   }, [isLoggedIn]);
 
   const [user, setUser] = useState({
@@ -76,7 +75,6 @@ const SignUp: FC = () => {
       }
 
       if (data.isVerified) {
-        console.log('from Login', data.token);
         document.cookie = data.token;
         setisLoggedIn(true);
       }

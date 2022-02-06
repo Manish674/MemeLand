@@ -1,3 +1,4 @@
+import { getCookie } from '../utils/cookie';
 import { FC, useEffect, useState, useContext } from 'react';
 import Router from 'next/router';
 
@@ -14,14 +15,14 @@ const Home: FC = () => {
   const { isUserValid } = useContext(AuthContext);
 
   useEffect(() => {
-    const token = document.cookie.split(';');
-    validate(token[1]);
+    const token = document.cookie
+    validate(token);
   }, []);
 
   const validate = async (token: string) => {
     const result = await isUserValid(token.trim());
 
-    if (!result.success)  {
+    if (!result.success) {
       Router.push('/');
     }
   };
