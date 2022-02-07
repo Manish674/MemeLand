@@ -31,8 +31,17 @@
 }
 
 .textContent {
-  border: 2px solid white;
   padding: 0.5rem;
   /* padding-left: 0.5rem; */ 
   /* padding-right: 0.5rem; */ 
+}
+
+.title {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 80%;
+  }
 }

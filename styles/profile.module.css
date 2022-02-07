@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+}
+
+.profileContainer {
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.profile {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pfp {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.postGrid {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  gap:1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  height: 80vh;
+}
+
+.img {
+  width: 40%;
+  object-fit: contain;
+}

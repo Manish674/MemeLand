@@ -60,6 +60,7 @@
     height: max-content;
     position: absolute;
     bottom: 0;
+    background: #151515;
   }
 
   .header {

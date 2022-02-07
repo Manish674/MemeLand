@@ -7,6 +7,7 @@ const AuthContextProvider = ({ children }: any) => {
   const [userDetails, setUserDetails] = useState({
     username: '',
     email: '',
+    pfp: ''
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);

@@ -28,7 +28,7 @@ const Posts = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginBottom: '84px' }}>
       {posts.length > 0
         ? posts.map((props) => <Post key={props._id} {...props} />)
         : ''}

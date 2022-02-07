@@ -18,7 +18,7 @@ const Sidebar = () => {
         </div>
         <div className={styles.navigation}>
           <div className={styles.navWrapper}>
-            <Link href="/">
+            <Link href="/profile">
               <div className={styles.linkItemWrapper}>
                 <img className={styles.linkPfp} />
                 <span className={styles.linkTxt}>Account</span>
