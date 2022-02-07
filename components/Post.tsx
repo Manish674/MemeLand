@@ -3,6 +3,7 @@ import Profile from './Profile';
 
 const Post = (props: any) => {
   const { title, mediaUrl, postedBy } = props;
+  console.log(postedBy);
 
   return (
     <div className={styles.container}>
