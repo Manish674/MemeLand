@@ -2,6 +2,7 @@ import styles from '../styles/Sidebar.module.css';
 import Link from 'next/link';
 import headerImg from '../public/headerImg.png';
 import { BsBookmark } from 'react-icons/bs';
+import { AiOutlineHome } from "react-icons/ai"
 import { useContext } from 'react';
 import { PostContext } from '../utils/postContext';
 
@@ -18,6 +19,13 @@ const Sidebar = () => {
         </div>
         <div className={styles.navigation}>
           <div className={styles.navWrapper}>
+            <Link href="/home" passHref={true}>
+              <div className={styles.linkItemWrapper}>
+                <AiOutlineHome className={styles.linkIcon} />
+                <span className={styles.linkTxt}>Home</span>
+              </div>
+            </Link>
+
             <Link href="/profile">
               <div className={styles.linkItemWrapper}>
                 <img className={styles.linkPfp} />
