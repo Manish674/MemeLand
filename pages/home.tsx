@@ -30,7 +30,7 @@ const Home: FC = () => {
   return (
     <div className={styles.container}>
       <Sidebar />
-      <CreatePost />
+      {/* <CreatePost /> */}
       <div className={styles.app}>
         <Posts />
       </div>

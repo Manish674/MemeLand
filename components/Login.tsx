@@ -1,12 +1,14 @@
 // import { getCookie, setCookie } from "../utils/cookie";
-import axios from '../utils/axios';
 import Link from 'next/link';
-import { FC, useState, ChangeEvent, useEffect } from 'react';
+import { FC, useState, ChangeEvent, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { AuthContext } from '../utils/authContext';
+
 import styles from '../styles/Authpage.module.css';
 
 const SignUp: FC = () => {
   const Router = useRouter();
+  const { login } = useContext(AuthContext);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState();
@@ -34,53 +36,14 @@ const SignUp: FC = () => {
     e.preventDefault();
     const { email, password } = user;
 
-    // if (!email || !password) return console.log('pls provide valid details');
-    if (!email) {
-      setIsError(true);
-      setFieldError({
-        ...fieldError,
-        emailFieldError: 'email field cannot be empty',
-      });
+    const result = await login(email, password);
+
+    if (!result.isVerified) {
+      alert('Email is not verified');
+      // document.cookie = result.token;
     }
 
-    if (!password) {
-      setIsError(true);
-      setFieldError({
-        ...fieldError,
-        passwordFieldError: 'password field cannot be empty',
-      });
-    }
-
-    setIsError(false);
-    setFieldError({
-      emailFieldError: '',
-      passwordFieldError: '',
-    });
-
-    // TODO work on the login functionality
-    try {
-      const { data } = await axios({
-        method: 'POST',
-        url: '/auth/login',
-        data: {
-          email,
-          password,
-        },
-      });
-
-      if (!data.success) {
-        setIsError(true);
-        setError(data.message);
-        return;
-      }
-
-      if (data.isVerified) {
-        document.cookie = data.token;
-        setisLoggedIn(true);
-      }
-    } catch (e: any) {
-      alert(e.message);
-    }
+    document.cookie = result.token;
   };
 
   return (

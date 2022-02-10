@@ -2,7 +2,8 @@ import styles from '../styles/Sidebar.module.css';
 import Link from 'next/link';
 import headerImg from '../public/headerImg.png';
 import { BsBookmark } from 'react-icons/bs';
-import { AiOutlineHome } from "react-icons/ai"
+import { AiOutlineHome } from 'react-icons/ai';
+
 import { useContext } from 'react';
 import { PostContext } from '../utils/postContext';
 
@@ -10,6 +11,7 @@ import { FiSend } from 'react-icons/fi';
 
 const Sidebar = () => {
   const { hidden, setHidden } = useContext<any>(PostContext);
+  const pfp: any = localStorage.getItem('pfp');
 
   return (
     <>
@@ -28,7 +30,7 @@ const Sidebar = () => {
 
             <Link href="/profile">
               <div className={styles.linkItemWrapper}>
-                <img className={styles.linkPfp} />
+                <img className={styles.linkPfp} src={pfp} />
                 <span className={styles.linkTxt}>Account</span>
               </div>
             </Link>
