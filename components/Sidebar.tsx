@@ -12,6 +12,8 @@ import { FiSend } from 'react-icons/fi';
 const Sidebar = () => {
   const { hidden, setHidden } = useContext<any>(PostContext);
   const pfp: any = localStorage.getItem('pfp');
+  console.log(pfp);
+  // const pfp = ""
 
   return (
     <>

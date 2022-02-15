@@ -1,4 +1,4 @@
-import { getCookie } from '../utils/cookie';
+// import { getCookie } from '../utils/cookie';
 import { FC, useEffect, useState, useContext } from 'react';
 import Router from 'next/router';
 
@@ -15,7 +15,7 @@ const Home: FC = () => {
   const { isUserValid } = useContext(AuthContext);
 
   useEffect(() => {
-    const token = document.cookie
+    const token = document.cookie;
     validate(token);
   }, []);
 

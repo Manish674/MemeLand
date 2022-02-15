@@ -9,8 +9,8 @@ import styles from '../styles/Authpage.module.css';
 const SignUp: FC = () => {
   const Router = useRouter();
   const { login } = useContext(AuthContext);
-  const [isLoggedIn, setisLoggedIn] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -38,9 +38,13 @@ const SignUp: FC = () => {
 
     const result = await login(email, password);
 
-    if (!result.isVerified) {
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+    if (!result?.isVerified) {
       alert('Email is not verified');
-      // document.cookie = result.token;
+      return;
     }
 
     document.cookie = result.token;
