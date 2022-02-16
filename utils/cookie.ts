@@ -8,7 +8,6 @@ const setCookie = (name: string, value: string) => {
 };
 
 const getCookie = (name: string) => {
-  console.log(document.cookie)
   // return document.cookie
   // return document.cookie.split(';');
 };

@@ -12,7 +12,6 @@ import { FiSend } from 'react-icons/fi';
 const Sidebar = () => {
   const { hidden, setHidden } = useContext<any>(PostContext);
   const pfp: any = localStorage.getItem('pfp');
-  console.log(pfp);
   // const pfp = ""
 
   return (
@@ -37,15 +36,12 @@ const Sidebar = () => {
               </div>
             </Link>
 
-            <button
-              className={styles.postButton}
-              onClick={() => setHidden(!hidden)}
-            >
+            <Link href="/createpost">
               <div className={styles.linkItemWrapper}>
                 <FiSend className={styles.linkIcon} />
                 <span className={styles.buttonText}>Post</span>
               </div>
-            </button>
+            </Link>
 
             <Link href="/" passHref={true}>
               <div className={styles.linkItemWrapper}>

@@ -3,8 +3,18 @@ import Sidebar from '../../components/Sidebar';
 import styles from '../../styles/profile.module.css';
 import axios from '../../utils/axios';
 
+type Details = {
+  pfp: string;
+  username: string;
+  posts: Array<any>;
+};
+
 const Profile = () => {
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState<Details>({
+    pfp: '',
+    username: '',
+    posts: [],
+  });
 
   useEffect(() => {
     const str = document.URL.split('/');
@@ -29,7 +39,7 @@ const Profile = () => {
     <div className={styles.container}>
       <Sidebar />
       <div className={styles.profileContainer}>
-       <div className={styles.profile}>
+        <div className={styles.profile}>
           <img className={styles.pfp} src={details?.pfp} />
           <div className={styles.text}>
             <h2>{details?.username}</h2>

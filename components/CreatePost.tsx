@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { Context, useContext, useEffect, useRef, useState } from 'react';
 
 import axios from '../utils/axios';
 import { PostContext } from '../utils/postContext';
@@ -6,6 +6,9 @@ import { PostContext } from '../utils/postContext';
 import styles from '../styles/createpost.module.css';
 
 const CreatePost = () => {
+  const postContext = useContext(PostContext);
+  if (postContext === null) return;
+
   const [postDetails, setPostDetails] = useState<any>({
     title: '',
     img: {
@@ -15,7 +18,6 @@ const CreatePost = () => {
   });
 
   // TODO go learn typescript
-
   const handleOnChange = (e: any) => {
     setPostDetails({ ...postDetails, [e.target.name]: e.target.value });
   };
@@ -38,6 +40,7 @@ const CreatePost = () => {
     reader.readAsDataURL(file);
   };
 
+  // CREATE post
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -45,14 +48,16 @@ const CreatePost = () => {
     data.append('file', postDetails.img.file);
     data.append('title', postDetails.title);
 
-    const response = await axios.post('/posts/', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authentication: `Bearer ${document.cookie}`,
-      },
-    });
+    postContext.createPost(data);
 
-    console.log(response.data);
+    // const response = await axios.post('/posts/', data, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //     Authentication: `Bearer ${document.cookie}`,
+    //   },
+    // });
+
+    // console.log(response.data);
   };
 
   return (

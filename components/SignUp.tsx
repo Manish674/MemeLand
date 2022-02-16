@@ -79,7 +79,6 @@ const SignUp: FC = (props) => {
           password,
         },
       });
-      console.log(data);
     } catch (e) {
       console.log('error happened');
       console.log(e);

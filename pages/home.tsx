@@ -15,7 +15,7 @@ const Home: FC = () => {
   const { isUserValid } = useContext(AuthContext);
 
   useEffect(() => {
-    const token = document.cookie;
+    const token: string = document.cookie;
     validate(token);
   }, []);
 
