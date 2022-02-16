@@ -1,0 +1,17 @@
+- Host the project
+
+--- Changes for auth ---
+  - improve auth flow
+
+--- Changes for post ---
+  - add like button
+
+--- Quick Changes ---
+  - show Sidebar in all pages except for login and register screen specially createpost.tsx
+  - start working on favoruites page 
+
+
+--- Change for  later ---
+  - add all auth function in auth context
+  - add all post function in post context
+  - imporve UI 
