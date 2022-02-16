@@ -6,6 +6,7 @@ const Post = (props: any) => {
   console.log(postedBy);
 
   return (
+
     <div className={styles.container}>
       <Profile postedBy={postedBy} />
       <div className={styles.imgWrapper}>
