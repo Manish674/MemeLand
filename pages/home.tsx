@@ -10,6 +10,8 @@ import WithAuth from '../utils/withAuth';
 import Sidebar from '../components/Sidebar';
 import CreatePost from '../components/CreatePost';
 import Posts from '../components/Posts';
+import DeleteModal from '../components/DeleteModal';
+import EditModal from '../components/EditModal';
 
 const Home: FC = () => {
   const { isUserValid } = useContext(AuthContext);
@@ -33,6 +35,8 @@ const Home: FC = () => {
       {/* <CreatePost /> */}
       <div className={styles.app}>
         <Posts />
+        <DeleteModal />
+        <EditModal />
       </div>
     </div>
   );

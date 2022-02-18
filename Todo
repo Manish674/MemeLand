@@ -5,6 +5,8 @@
 
 --- Changes for post ---
   - add like button
+  - added menu to update and delete the post 
+  - create edit and delete modal
 
 --- Quick Changes ---
   - show Sidebar in all pages except for login and register screen specially createpost.tsx
@@ -15,3 +17,5 @@
   - add all auth function in auth context
   - add all post function in post context
   - imporve UI 
+
+----- DONE ------
