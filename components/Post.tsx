@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import styles from '../styles/post.module.css';
 import Profile from './Profile';
-import EditModal from './EditModal';
-import DeleteModal from './DeleteModal';
 
 const Post = (props: any) => {
   const [open, setIsOpen] = useState<boolean>(false);
