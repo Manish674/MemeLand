@@ -1,7 +1,9 @@
 - Host the project
+--- Changes for auth ---
+  - remove context system and add redux toolkit
 
 --- Changes for auth ---
-  - improve auth flow
+  [x] improve auth flow
 
 --- Changes for post ---
   - add like button
