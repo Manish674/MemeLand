@@ -8,12 +8,14 @@ import SignUp from '../components/SignUp';
 import { useRouter } from 'next/router';
 
 //TODO make a better approach for jwt token
-
 const Home: NextPage = () => {
   const Router = useRouter();
+
   useEffect(() => {
-    if (document.cookie) {
-      Router.push('/home');
+    const token = localStorage.getItem("_t");
+    const isAuth = localStorage.getItem("isAuth") 
+    if (token && isAuth) {
+      Router.push("/home")
     }
   });
 
@@ -28,7 +30,6 @@ const Home: NextPage = () => {
             className={styles.imgLG}
             src={headerImgLGScreen.src}
             alt="header.png"
-            // width="100"
           />
           <img className={styles.img} src={headerImg.src} alt="header.png" />
         </div>
