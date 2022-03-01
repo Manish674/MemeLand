@@ -9,6 +9,7 @@ import styles from '../styles/Authpage.module.css';
 const SignUp: FC = () => {
   const Router = useRouter();
   const data = useContext(AuthContext);
+
   if (data === null) return <div>loading</div>;
   const { login } = data;
 
@@ -17,8 +18,10 @@ const SignUp: FC = () => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    const token = document.cookie;
-    if (token) Router.push('/home');
+    // const token = document.cookie;
+
+    // if (token) Router.push('/home');
+    if (localStorage.getItem('isAuth') === 'true') Router.push('/home');
   }, [isLoggedIn]);
 
   const [user, setUser] = useState({
@@ -43,14 +46,20 @@ const SignUp: FC = () => {
 
     if (!result.success) {
       alert(result.message);
+      localStorage.setItem('isAuth', 'false');
+      setisLoggedIn(true);
       return;
     }
     if (!result?.isVerified) {
       alert('Email is not verified');
+      localStorage.setItem('isAuth', 'false');
+      setisLoggedIn(true);
       return;
     }
 
-    document.cookie = result.token;
+    localStorage.setItem('_t', result.token);
+    localStorage.setItem('isAuth', 'true');
+    setisLoggedIn(true);
   };
 
   return (

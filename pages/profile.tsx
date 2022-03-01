@@ -3,10 +3,18 @@ import Sidebar from '../components/Sidebar';
 import styles from '../styles/profile.module.css';
 import axios from '../utils/axios';
 
+type Details = {
+  username: string;
+  _id: string;
+  posts: [];
+  pfp: string;
+};
+
 const Profile = () => {
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState<Details>();
+
   useEffect(() => {
-    const token = document.cookie;
+    const token = localStorage.getItem('_t');
     fetchMySelf(token);
   }, []);
 
@@ -20,6 +28,8 @@ const Profile = () => {
     });
     setDetails(data.result[0]);
   };
+
+  console.log(details);
 
   return (
     <div className={styles.container}>

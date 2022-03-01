@@ -66,7 +66,7 @@ const AuthContextProvider = ({ children }: any) => {
       return data;
       // set the user
     } catch (e) {
-      console.log(e);
+      return e;
     }
   };
 

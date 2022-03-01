@@ -4,14 +4,19 @@ import headerImg from '../public/headerImg.png';
 import { BsBookmark } from 'react-icons/bs';
 import { AiOutlineHome } from 'react-icons/ai';
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PostContext } from '../utils/postContext';
 
 import { FiSend } from 'react-icons/fi';
 
 const Sidebar = () => {
+  const [pfp, setPfp] = useState();
   const { hidden, setHidden } = useContext<any>(PostContext);
-  const pfp: any = localStorage.getItem('pfp');
+  useEffect(() => {
+    const pfp: any = localStorage.getItem('pfp');
+    setPfp(pfp);
+  }, []);
+
   // const pfp = ""
 
   return (
