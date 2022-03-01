@@ -3,11 +3,13 @@ import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 type CreatePost = (postData: FormData) => void;
 
+type UpdatePost = (id: string, dataToUpdate: any) => void;
+
 type PostAppContext = {
   hidden: boolean;
   setHidden: Dispatch<SetStateAction<boolean>>;
-  createPost: (postData: FormData) => void;
-  updatePost: (DataToUpdate: { name: string; img: string }) => void;
+  createPost: CreatePost;
+  updatePost: UpdatePost;
 };
 
 const PostContext = createContext<PostAppContext | null>(null);
@@ -32,7 +34,9 @@ const PostContextProvider = ({ children }: any) => {
     }
   };
 
-  const updatePost = async () => {};
+  const updatePost: UpdatePost = async (id, dataToUpdate) => {
+    console.log(id, dataToUpdate);
+  };
 
   const PostAppContext: PostAppContext = {
     hidden,

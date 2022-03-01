@@ -1,7 +1,23 @@
 import axios from './axios';
-import { createContext, useState } from 'react';
+import { createContext, useState, SetStateAction, Dispatch } from 'react';
 
-const AuthContext = createContext(null);
+type UserDetails = {
+  email: string;
+  username: string;
+  pfp: string;
+};
+
+type AppAuthContext = {
+  login: (email: string, password: string) => Promise<any>;
+  logout: () => void;
+  userDetails: UserDetails;
+  setUserDetails: Dispatch<SetStateAction<UserDetails>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  isUserValid: (token: string) => Promise<any>;
+};
+
+const AuthContext = createContext<null | AppAuthContext>(null);
 
 const AuthContextProvider = ({ children }: any) => {
   const [userDetails, setUserDetails] = useState({

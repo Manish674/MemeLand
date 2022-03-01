@@ -8,7 +8,10 @@ import styles from '../styles/Authpage.module.css';
 
 const SignUp: FC = () => {
   const Router = useRouter();
-  const { login } = useContext(AuthContext);
+  const data = useContext(AuthContext);
+  if (data === null) return <div>loading</div>;
+  const { login } = data;
+
   const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [error, setError] = useState();
