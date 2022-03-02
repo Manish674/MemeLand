@@ -2,12 +2,15 @@ import { Context, useContext, useEffect, useRef, useState } from 'react';
 
 import axios from '../utils/axios';
 import { PostContext } from '../utils/postContext';
-
+import { useCreatePostMutation } from '../utils/features/posts/postSlice';
 import styles from '../styles/createpost.module.css';
 
 const CreatePost = () => {
   const postContext = useContext(PostContext);
   if (postContext === null) return;
+
+  const [createPost, result] = useCreatePostMutation();
+  console.log(createPost, result);
 
   const [postDetails, setPostDetails] = useState<any>({
     title: '',
@@ -48,7 +51,10 @@ const CreatePost = () => {
     data.append('file', postDetails.img.file);
     data.append('title', postDetails.title);
 
-    postContext.createPost(data);
+    const token = localStorage.getItem('_t');
+    if (token === null) return 'TOKEN NOT FOUND';
+    createPost({ data, token: token });
+    // postContext.createPost(data);
 
     // const response = await axios.post('/posts/', data, {
     //   headers: {

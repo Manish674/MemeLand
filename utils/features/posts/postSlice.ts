@@ -9,7 +9,11 @@ interface Post {
 
 export interface PostArray {
   entities: [];
-  loading: 'idle' | 'true' | 'false';
+}
+
+interface PostRequest {
+  data: FormData;
+  token: string;
 }
 
 const initialState = {
@@ -21,6 +25,7 @@ export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/api/v1/posts/' }),
   endpoints: (builder) => ({
+    // Post is the data returned and string is the parameter passed
     getPosts: builder.query<Post, string>({
       query(token) {
         return {
@@ -32,16 +37,34 @@ export const postApi = createApi({
       },
     }),
 
-    createPost: builder.mutation<Post, boolean>({
+    createPost: builder.mutation<void, PostRequest>({
       query(data) {
         return {
-          url: 'posts',
           method: 'POST',
-          body: data,
+          url: '/',
+          headers: {
+            authentication: `Bearer ${data.token}`,
+          },
+
+          body: data.data,
+        };
+      },
+    }),
+
+    updatePost: builder.mutation<void, { id: string; Post: Post }>({
+      query(data) {
+        return {
+          url: `${data.id}`,
+          method: 'PUT',
+          body: data.Post,
         };
       },
     }),
   }),
 });
 
-export const { useGetPostsQuery } = postApi;
+export const {
+  useGetPostsQuery,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+} = postApi;

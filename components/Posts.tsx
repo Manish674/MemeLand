@@ -14,7 +14,6 @@ const Posts = () => {
   if (isLoading) {
     return <div>..........loading</div>;
   } else if (data) {
-    console.log(data);
     return (
       <div style={{ marginBottom: '84px' }}>
         {posts.length > 0
@@ -26,6 +25,8 @@ const Posts = () => {
     console.log(error);
     return <div>something went wrong</div>;
   }
+
+  return <div></div>;
 
   // const fetchPosts = async () => {
   //   try {
