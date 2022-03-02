@@ -16,18 +16,20 @@ const withAuth = (WrappedComponent: any) => {
       if (!token) {
         Router.push('/');
       }
-      console.log('Yup running this');
+
       const { data } = await axios({
         url: 'auth/validate',
         headers: {
           authentication: `Bearer ${token}`,
         },
       });
+
+      // console.log(data);
       setVerified(data.success);
     }
 
     if (verified) return <WrappedComponent {...props} />;
-    return <div>You not authenticated</div>;
+    return <div>something</div>;
   };
 };
 

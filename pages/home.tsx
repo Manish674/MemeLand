@@ -6,7 +6,7 @@ import WithAuth from '../utils/WithAuth';
 import Sidebar from '../components/Sidebar';
 // import CreatePost from '../components/CreatePost';
 import Posts from '../components/Posts';
-import DeleteModal from '../components/DeleteModal';
+// import DeleteModal from '../components/DeleteModal';
 // import EditModal from '../components/EditModal';
 
 const Home: FC = () => {
@@ -16,7 +16,7 @@ const Home: FC = () => {
       {/* <CreatePost /> */}
       <div className={styles.app}>
         <Posts />
-        <DeleteModal />
+        {/* <DeleteModal /> */}
         {/* <EditModal /> */}
       </div>
     </div>

@@ -15,11 +15,12 @@ const Home: NextPage = () => {
   const Router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('_t');
-    const isAuth = localStorage.getItem('isAuth');
-    if (token && isAuth) {
-      Router.push('/home');
-    }
+    // const token = localStorage.getItem('_t');
+    // const isAuth = localStorage.getItem('isAuth');
+
+    // if (token && isAuth) {
+    //   Router.push('/home');
+    // }
   });
 
   return (
