@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from '../../axios';
+// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface Post {
   mediaUrl: string;
@@ -17,25 +17,31 @@ const initialState = {
   loading: 'idle',
 };
 
-const fetchPost = createAsyncThunk('posts/', async (token, thunkApi) => {
-  const response = await axios({
-    method: 'GET',
-    url: '/posts',
-    headers: {
-      authentication: `Bearer ${token}`,
-    },
-  });
+export const postApi = createApi({
+  reducerPath: 'postApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/api/v1/posts/' }),
+  endpoints: (builder) => ({
+    getPosts: builder.query<Post, string>({
+      query(token) {
+        return {
+          url: '/',
+          headers: {
+            authentication: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
 
-  return response.data;
+    createPost: builder.mutation<Post, boolean>({
+      query(data) {
+        return {
+          url: 'posts',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
+  }),
 });
 
-const postSlice = createSlice({
-  name: 'posts',
-  initialState,
-  extraReducers: (builder) => {
-    builder.addCase(fetchPost.fulfilled, (state, action) => {
-      state.entities.push(action.payload);
-      state.loading = 'false';
-    });
-  },
-});
+export const { useGetPostsQuery } = postApi;

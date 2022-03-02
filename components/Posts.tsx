@@ -1,39 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../utils/axios';
+import { useGetPostsQuery } from '../utils/features/posts/postSlice';
+
+// import axios from '../utils/axios';
 import Post from './Post';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const token = localStorage.getItem('_t');
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  if (token === null) return <div>You are not authorize</div>;
 
-  const fetchPosts = async () => {
-    try {
-      const token = document.cookie;
-      if (!token) return;
+  const { data, error, isLoading } = useGetPostsQuery(token);
+  if (isLoading) {
+    return <div>..........loading</div>;
+  } else if (data) {
+    console.log(data);
+    return (
+      <div style={{ marginBottom: '84px' }}>
+        {posts.length > 0
+          ? posts.map((props) => <Post key={props._id} {...props} />)
+          : ''}
+      </div>
+    );
+  } else if (error) {
+    console.log(error);
+    return <div>something went wrong</div>;
+  }
 
-      const { data } = await axios({
-        method: 'GET',
-        url: '/posts',
-        headers: {
-          authentication: `Bearer ${token}`,
-        },
-      });
-      setPosts(data.posts);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const fetchPosts = async () => {
+  //   try {
+  //     const token = document.cookie;
+  //     if (!token) return;
 
-  return (
-    <div style={{ marginBottom: '84px' }}>
-      {posts.length > 0
-        ? posts.map((props) => <Post key={props._id} {...props} />)
-        : ''}
-    </div>
-  );
+  //     const { data } = await axios({
+  //       method: 'GET',
+  //       url: '/posts',
+  //       headers: {
+  //         authentication: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setPosts(data.posts);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 };
 
 export default Posts;
