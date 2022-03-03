@@ -25,7 +25,7 @@ export const postApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/api/v1/posts/' }),
   endpoints: (builder) => ({
     // Post is the data returned and string is the parameter passed
-    getPosts: builder.query<Post, string>({
+    getPosts: builder.query<any, string>({
       query(token) {
         return {
           url: '/',
