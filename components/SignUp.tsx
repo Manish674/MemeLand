@@ -1,9 +1,10 @@
+import React from 'react';
 import axios from '../utils/axios';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import styles from '../styles/Authpage.module.css';
 import Link from 'next/link';
 
-const SignUp: FC = (props) => {
+const SignUp: FC = () => {
   const [user, setUser] = useState({
     username: '',
     email: '',

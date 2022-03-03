@@ -1,13 +1,12 @@
-// import { getCookie } from '../utils/cookie';
+import React from 'react';
+
 import { FC } from 'react';
+
 import styles from '../styles/homepage.module.css';
 import WithAuth from '../utils/WithAuth';
 
 import Sidebar from '../components/Sidebar';
-// import CreatePost from '../components/CreatePost';
 import Posts from '../components/Posts';
-// import DeleteModal from '../components/DeleteModal';
-// import EditModal from '../components/EditModal';
 
 const Home: FC = () => {
   return (

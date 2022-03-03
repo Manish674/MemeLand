@@ -1,4 +1,5 @@
 // import { getCookie, setCookie } from "../utils/cookie";
+import React from 'react';
 import Link from 'next/link';
 import { FC, useState, ChangeEvent, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';

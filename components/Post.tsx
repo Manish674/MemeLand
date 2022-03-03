@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/post.module.css';
 import Profile from './Profile';
 import DeleteModal from '../components/DeleteModal';

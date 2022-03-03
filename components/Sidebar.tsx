@@ -1,17 +1,17 @@
+import React from 'react';
 import styles from '../styles/Sidebar.module.css';
 import Link from 'next/link';
 import headerImg from '../public/headerImg.png';
 import { BsBookmark } from 'react-icons/bs';
 import { AiOutlineHome } from 'react-icons/ai';
 
-import { useContext, useEffect, useState } from 'react';
-import { PostContext } from '../utils/postContext';
+import { useEffect, useState } from 'react';
 
 import { FiSend } from 'react-icons/fi';
 
 const Sidebar = () => {
   const [pfp, setPfp] = useState();
-  const { hidden, setHidden } = useContext<any>(PostContext);
+
   useEffect(() => {
     const pfp: any = localStorage.getItem('pfp');
     setPfp(pfp);

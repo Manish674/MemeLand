@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useDeletePostMutation } from '../utils/features/posts/postSlice';
 
 import styles from '../styles/createpost.module.css';
