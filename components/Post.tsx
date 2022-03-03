@@ -5,16 +5,30 @@ import DeleteModal from '../components/DeleteModal';
 import EditModal from '../components/EditModal';
 
 const Post = (props: any) => {
+  // for the menu { edit and delete}
   const [open, setIsOpen] = useState<boolean>(false);
+
+  // for edit modal
+  const [isHidden, setIsHidden] = useState(true);
   const displayValue = open ? '' : 'none';
 
-  console.log(props);
-  // const { title, mediaUrl, postedBy } = props;
+  const { title, mediaUrl, postedBy } = props;
+
+  const handleEditMenuButtonClick = () => {
+    setIsHidden(false);
+    setIsOpen(false)
+  };
 
   return (
     <>
       <DeleteModal />
-      <EditModal />
+      <EditModal
+        isHidden={isHidden}
+        setIsHidden={setIsHidden}
+        postId={props._id}
+        postTitle={title}
+        postImg={mediaUrl}
+      />
       <div className={styles.container}>
         <div className={styles.header}>
           <Profile postedBy={postedBy} />
@@ -32,7 +46,12 @@ const Post = (props: any) => {
             style={{ display: `${displayValue}` }}
           >
             <div className={styles.menu_button}>
-              <button className={styles.menu__button}>edit</button>
+              <button
+                className={styles.menu__button}
+                onClick={() => handleEditMenuButtonClick()}
+              >
+                edit
+              </button>
               <button className={styles.menu__button}>delete</button>
             </div>
           </div>

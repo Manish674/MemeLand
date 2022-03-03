@@ -1,4 +1,3 @@
-// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface Post {
@@ -16,10 +15,10 @@ interface PostRequest {
   token: string;
 }
 
-const initialState = {
-  entities: [],
-  loading: 'idle',
-};
+// const initialState = {
+//   entities: [],
+//   loading: 'idle',
+// };
 
 export const postApi = createApi({
   reducerPath: 'postApi',
@@ -51,7 +50,7 @@ export const postApi = createApi({
       },
     }),
 
-    updatePost: builder.mutation<void, { id: string; Post: Post }>({
+    updatePost: builder.mutation<void, { id: string; Post: Partial<Post> }>({
       query(data) {
         return {
           url: `${data.id}`,

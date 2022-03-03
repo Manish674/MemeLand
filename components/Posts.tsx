@@ -11,7 +11,6 @@ const Posts = () => {
   if (token === null) return <div>You are not authorize</div>;
 
   const { data, error, isLoading } = useGetPostsQuery(token);
-  console.log(data);
 
   if (isLoading) {
     return <div>..........loading</div>;

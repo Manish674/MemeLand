@@ -10,7 +10,6 @@ const CreatePost = () => {
   if (postContext === null) return;
 
   const [createPost, result] = useCreatePostMutation();
-  console.log(createPost, result);
 
   const [postDetails, setPostDetails] = useState<any>({
     title: '',
@@ -54,16 +53,6 @@ const CreatePost = () => {
     const token = localStorage.getItem('_t');
     if (token === null) return 'TOKEN NOT FOUND';
     createPost({ data, token: token });
-    // postContext.createPost(data);
-
-    // const response = await axios.post('/posts/', data, {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //     Authentication: `Bearer ${document.cookie}`,
-    //   },
-    // });
-
-    // console.log(response.data);
   };
 
   return (
