@@ -24,11 +24,13 @@ const withAuth = (WrappedComponent: any) => {
         },
       });
 
-      // console.log(data);
-      setVerified(data.success);
+      const value = data.success;
+      setVerified(value);
     }
 
     if (verified) return <WrappedComponent {...props} />;
+    else if (!verified) return <div>NOT AUTHORIZED</div>;
+
     return <div>something</div>;
   };
 };

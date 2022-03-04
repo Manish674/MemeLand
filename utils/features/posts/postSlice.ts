@@ -22,7 +22,10 @@ interface PostRequest {
 
 export const postApi = createApi({
   reducerPath: 'postApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/api/v1/posts/' }),
+  // baseQuery: fetchBaseQuery({ baseUrl: 'https://memeland4905.herokuapp.com/api/v1/posts/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:4000/api/v1/posts/',
+  }),
   endpoints: (builder) => ({
     // Post is the data returned and string is the parameter passed
     getPosts: builder.query<any, string>({
@@ -75,5 +78,5 @@ export const {
   useGetPostsQuery,
   useCreatePostMutation,
   useUpdatePostMutation,
-  useDeletePostMutation
+  useDeletePostMutation,
 } = postApi;

@@ -19,15 +19,12 @@ const SignUp: FC = () => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    // const token = document.cookie;
-
-    // if (token) Router.push('/home');
     if (localStorage.getItem('isAuth') === 'true') Router.push('/home');
   }, [isLoggedIn]);
 
   const [user, setUser] = useState({
-    email: '',
-    password: '',
+    email: 'manishchoudhary4905@gmail.com',
+    password: 'manish@495',
   });
 
   const [fieldError, setFieldError] = useState({
@@ -48,13 +45,11 @@ const SignUp: FC = () => {
     if (!result.success) {
       alert(result.message);
       localStorage.setItem('isAuth', 'false');
-      setisLoggedIn(true);
       return;
     }
     if (!result?.isVerified) {
       alert('Email is not verified');
       localStorage.setItem('isAuth', 'false');
-      setisLoggedIn(true);
       return;
     }
 

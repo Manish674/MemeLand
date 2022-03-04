@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import type { NextPage } from 'next';
 import headerImg from '../public/headerImg.png';
 import styles from '../styles/Home.module.css';
