@@ -24,7 +24,10 @@ export const postApi = createApi({
   reducerPath: 'postApi',
   // baseQuery: fetchBaseQuery({ baseUrl: 'https://memeland4905.herokuapp.com/api/v1/posts/' }),
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:4000/api/v1/posts/',
+    baseUrl:
+      process.env.NEXT_PUBLIC === 'dev'
+        ? 'http://localhost:8000/api/v1/posts/'
+        : `${process.env.NEXT_PUBLIC_URI}/api/v1/posts/`,
   }),
   endpoints: (builder) => ({
     // Post is the data returned and string is the parameter passed

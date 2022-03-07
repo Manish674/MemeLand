@@ -18,7 +18,10 @@ const Home: NextPage = () => {
     const token = localStorage.getItem('_t');
     const isAuth = localStorage.getItem('isAuth');
 
-    if (token && isAuth) {
+    console.log(token);
+    console.log(isAuth);
+
+    if (token && isAuth === 'true') {
       Router.push('/home');
     }
   });

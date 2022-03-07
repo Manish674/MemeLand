@@ -14,6 +14,7 @@ const withAuth = (WrappedComponent: any) => {
 
     async function verification(token: string | null) {
       if (!token) {
+        localStorage.setItem('isAuth', 'false');
         Router.push('/');
       }
 
@@ -25,11 +26,18 @@ const withAuth = (WrappedComponent: any) => {
       });
 
       const value = data.success;
+
+      if (value === false) {
+        localStorage.setItem('isAuth', 'false');
+      }
+
       setVerified(value);
     }
 
     if (verified) return <WrappedComponent {...props} />;
-    else if (!verified) return <div>NOT AUTHORIZED</div>;
+    else if (!verified) {
+      return <div>NOT AUTHORIZED</div>;
+    }
 
     return <div>something</div>;
   };

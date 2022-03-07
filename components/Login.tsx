@@ -23,8 +23,8 @@ const SignUp: FC = () => {
   }, [isLoggedIn]);
 
   const [user, setUser] = useState({
-    email: 'manishchoudhary4905@gmail.com',
-    password: 'manish@495',
+    email: '',
+    password: '',
   });
 
   const [fieldError, setFieldError] = useState({
