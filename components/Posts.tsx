@@ -28,24 +28,6 @@ const Posts = () => {
   }
 
   return <div></div>;
-
-  // const fetchPosts = async () => {
-  //   try {
-  //     const token = document.cookie;
-  //     if (!token) return;
-
-  //     const { data } = await axios({
-  //       method: 'GET',
-  //       url: '/posts',
-  //       headers: {
-  //         authentication: `Bearer ${token}`,
-  //       },
-  //     });
-  //     setPosts(data.posts);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 };
 
 export default Posts;

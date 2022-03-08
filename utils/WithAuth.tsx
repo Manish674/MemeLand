@@ -14,6 +14,7 @@ const withAuth = (WrappedComponent: any) => {
 
     async function verification(token: string | null) {
       if (!token) {
+        console.log('no token');
         localStorage.setItem('isAuth', 'false');
         Router.push('/');
       }
@@ -24,7 +25,6 @@ const withAuth = (WrappedComponent: any) => {
           authentication: `Bearer ${token}`,
         },
       });
-      console.log(data);
       const value = data.success;
 
       if (value === false) {
