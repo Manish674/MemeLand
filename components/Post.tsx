@@ -11,6 +11,7 @@ const Post = (props: any) => {
     const user = localStorage.getItem('username');
     setLoggedUser(user ? user : '');
   }, []);
+
   // for the menu { edit and delete}
   const [open, setIsOpen] = useState<boolean>(false);
   const displayValue = open ? '' : 'none';

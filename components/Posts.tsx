@@ -5,7 +5,6 @@ import { useGetPostsQuery } from '../utils/features/posts/postSlice';
 import Post from './Post';
 
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
   const token = localStorage.getItem('_t');
 
   if (token === null) return <div>You are not authorize</div>;
@@ -19,15 +18,14 @@ const Posts = () => {
       <div style={{ marginBottom: '84px' }}>
         {data.posts.length > 0
           ? data.posts.map((props: any) => <Post key={props._id} {...props} />)
-          : ''}
+          : 'no imgs for now'}
       </div>
     );
   } else if (error) {
     console.log(error);
     return <div>something went wrong</div>;
+  } else {
+    return <div>Exception</div>;
   }
-
-  return <div></div>;
 };
-
 export default Posts;
