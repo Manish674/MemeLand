@@ -25,7 +25,7 @@ export const postApi = createApi({
   // baseQuery: fetchBaseQuery({ baseUrl: 'https://memeland4905.herokuapp.com/api/v1/posts/' }),
   baseQuery: fetchBaseQuery({
     baseUrl:
-      process.env.NEXT_PUBLIC === 'dev'
+      process.env.NEXT_PUBLIC_ENV === 'dev'
         ? 'http://localhost:8000/api/v1/posts/'
         : `${process.env.NEXT_PUBLIC_URI}/api/v1/posts/`,
   }),

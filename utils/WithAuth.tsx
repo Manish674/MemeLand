@@ -24,7 +24,7 @@ const withAuth = (WrappedComponent: any) => {
           authentication: `Bearer ${token}`,
         },
       });
-
+      console.log(data);
       const value = data.success;
 
       if (value === false) {

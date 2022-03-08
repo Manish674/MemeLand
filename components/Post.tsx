@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/post.module.css';
 import Profile from './Profile';
 import DeleteModal from '../components/DeleteModal';
 import EditModal from '../components/EditModal';
 
 const Post = (props: any) => {
+  const [loggedUser, setLoggedUser] = useState<string>('');
+
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    setLoggedUser(user ? user : '');
+  }, []);
   // for the menu { edit and delete}
   const [open, setIsOpen] = useState<boolean>(false);
   const displayValue = open ? '' : 'none';
@@ -46,14 +52,16 @@ const Post = (props: any) => {
       <div className={styles.container}>
         <div className={styles.header}>
           <Profile postedBy={postedBy} />
-          <div className={styles.menu}>
-            <span
-              className={styles.dropdownButton}
-              onClick={() => setIsOpen(!open)}
-            >
-              ...
-            </span>
-          </div>
+          {loggedUser === postedBy.username && (
+            <div className={styles.menu}>
+              <span
+                className={styles.dropdownButton}
+                onClick={() => setIsOpen(!open)}
+              >
+                ...
+              </span>
+            </div>
+          )}
 
           <div
             className={styles.menuContainer}
