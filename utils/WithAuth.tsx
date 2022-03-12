@@ -4,13 +4,16 @@ import { useEffect, useState } from 'react';
 
 const withAuth = (WrappedComponent: any) => {
   return (props: any) => {
-    const [verified, setVerified] = useState(false);
+    const [verified, setVerified] = useState<boolean | null>(null);
     const Router = useRouter();
 
     useEffect(() => {
       const token = localStorage.getItem('_t');
       verification(token);
-    }, []);
+      if (verified === false) {
+        Router.push('/login');
+      }
+    }, [verified]);
 
     async function verification(token: string | null) {
       if (!token) {
@@ -25,6 +28,7 @@ const withAuth = (WrappedComponent: any) => {
           authentication: `Bearer ${token}`,
         },
       });
+      console.log(data);
       const value = data.success;
 
       if (value === false) {
