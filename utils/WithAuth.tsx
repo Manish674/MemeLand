@@ -39,6 +39,7 @@ const withAuth = (WrappedComponent: any) => {
     }
 
     if (verified) return <WrappedComponent {...props} />;
+
     else if (!verified) {
       return <div>NOT AUTHORIZED</div>;
     }
