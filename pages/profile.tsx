@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import styles from '../styles/profile.module.css';
 import axios from '../utils/axios';
+import DefaultProfile from '../public/defaultProfile.jpg';
 
 type Details = {
   username: string;
@@ -30,16 +31,29 @@ const Profile = () => {
     setDetails(data.result[0]);
   };
 
-  console.log(details);
-
   return (
     <div className={styles.container}>
       <Sidebar />
       <div className={styles.profileContainer}>
         <div className={styles.profile}>
-          <img className={styles.pfp} src={details?.pfp} />
-          <div className={styles.text}>
-            <h2>{details?.username}</h2>
+          <img
+            className={styles.pfp}
+            src={details?.pfp ? details.pfp : DefaultProfile.src}
+          />
+          <div>
+            <div className={styles.text}>
+              <h2>{details?.username}</h2>
+            </div>
+            <input
+              type="file"
+              name="uploadfile"
+              id="img"
+              style={{ display: 'none' }}
+            />
+            {/* add upload logo here */}
+            <label htmlFor="img" className={styles.uploadLabel}>
+              upload pfp
+            </label>
           </div>
         </div>
         <div className={styles.postGrid}>

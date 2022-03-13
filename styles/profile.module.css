@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .pfp {
@@ -23,12 +23,21 @@
   border-radius: 50%;
 }
 
+.text {
+  margin-bottom: 0.5rem;
+}
+
+.uploadLabel {
+  color: #47979d;
+  cursor: pointer;
+}
+
 .postGrid {
   width: 80%;
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  gap:1rem;
+  gap: 1rem;
   justify-content: center;
   margin-top: 2rem;
   height: 80vh;
