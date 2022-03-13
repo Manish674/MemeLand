@@ -1,10 +1,21 @@
+.mainContainer {
+  display: flex;
+}
+
+.createPostWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
-  position: absolute;
-  top: 50%;
-  bottom: 50%;
-  left: 50%;
-  right: 50%;
-  transform: translate(-50%, -50%);
+  /* position: absolute; */
+  /* top: 50%; */
+  /* bottom: 50%; */
+  /* left: 50%; */
+  /* right: 50%; */
+  /* transform: translate(-50%, -50%); */
   width: 90%;
   height: 80vh;
   background: black;
