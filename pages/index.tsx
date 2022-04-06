@@ -16,13 +16,13 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('_t');
+
     const isAuth = localStorage.getItem('isAuth');
 
     if (token && isAuth === 'true') {
       Router.push('/home');
     }
   });
-
 
   return (
     <>
