@@ -1,7 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --bg-color: #151515;
-  --button-bg-primary: #92CBF7;
-  --input-border: #C7C7C7;
+  --button-bg-primary: #92cbf7;
+  --input-border: #c7c7c7;
   --text-color: #ffffff;
 }
 
@@ -14,8 +18,8 @@ body {
   background: var(--bg-color);
   color: var(--text-color);
 }
-body{
-  overflow-x: hidden!important;
+body {
+  overflow-x: hidden !important;
 }
 
 a {

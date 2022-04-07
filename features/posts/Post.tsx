@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/post.module.css';
+import styles from '../../styles/post.module.css';
 import Profile from '../../components/Profile';
 import Modal from './PostModals';
 // import EditModal from '../components/EditModal';

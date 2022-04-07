@@ -11,22 +11,24 @@ const Posts = () => {
 
   const { data, error, isLoading } = useGetPostsQuery(token);
 
-  if (isLoading) {
-    return <div>..........loading</div>;
-  } else if (data) {
-    return (
-      <div style={{ marginBottom: '84px' }}>
-        {data.posts.length > 0
-          ? data.posts.map((props: any) => <Post key={props._id} {...props} />)
-          : 'no imgs for now'}
-      </div>
-    );
-  } else if (error) {
-    console.log(error);
-    return <div>something went wrong</div>;
-  } else {
-    return <div>Exception</div>;
-  }
+  console.log(data);
+  return <div>Hello world</div>;
+  // if (isLoading) {
+  //   return <div>..........loading</div>;
+  // } else if (data) {
+  //   return (
+  //     <div style={{ marginBottom: '84px' }}>
+  //       {data.posts.length > 0
+  //         ? data.posts.map((props: any) => <Post key={props._id} {...props} />)
+  //         : 'no imgs for now'}
+  //     </div>
+  //   );
+  // } else if (error) {
+  //   console.log(error);
+  //   return <div>something went wrong</div>;
+  // } else {
+  //   return <div>Exception</div>;
+  // }
 };
 
 export default Posts;
