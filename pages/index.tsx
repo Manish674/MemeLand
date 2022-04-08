@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
 
-import headerImgLGScreen from '../public/headerImgLGScreen.png';
-import headerImg from '../public/headerImg.png';
-import titleImg from '../public/title.png';
+// import headerImgLGScreen from '../public/headerImgLGScreen.png';
+// import headerImg from '../public/headerImg.png';
+// import titleImg from '../public/title.png';
 
-import SignUp from '../components/SignUp';
+// import SignUp from '../components/SignUp';
 
-import styles from '../styles/Home.module.css';
-import Post from '../features/posts/';
+// import styles from '../styles/Home.module.css';
+// import Post from '../features/posts/';
+import { Login, SignUp } from '../features/auth/';
 
 //TODO make a better approach for jwt token
 const Home: NextPage = () => {
-  return <Post />;
+  return (
+    <>
+      <Login />;
+      <SignUp />;
+    </>
+  );
   // const Router = useRouter();
 
   // useEffect(() => {
