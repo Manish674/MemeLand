@@ -10,7 +10,9 @@ const store = configureStore({
   },
   // to enable caching and other useful features
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(postApi.middleware),
+    getDefaultMiddleware()
+      .concat(postApi.middleware)
+      .concat(authApi.middleware),
 });
 
 // for refecting stuff when change the db

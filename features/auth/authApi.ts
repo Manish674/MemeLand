@@ -41,6 +41,7 @@ export const authApi = createApi({
     register: builder.mutation<any, Omit<Register, 'token'>>({
       query(data) {
         return {
+          Headers,
           method: 'POST',
           url: '/register',
           body: {

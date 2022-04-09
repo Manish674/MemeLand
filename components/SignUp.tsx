@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 const SignUp: FC = () => {
   const [user, setUser] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: 'manish',
+    email: 'manishchoudhary4905@gmail.com',
+    password: 'manish@495',
     passwordConfirm: '',
   });
 

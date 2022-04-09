@@ -5,9 +5,9 @@ import { useRegisterMutation } from './authApi';
 
 const SignUp: FC = () => {
   const [user, setUser] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: 'manish',
+    email: 'manishchoudhary4905@gmail.com',
+    password: 'manish@495',
     passwordConfirm: '',
   });
 
@@ -27,7 +27,6 @@ const SignUp: FC = () => {
       dateOfBirth: '02-03-1919',
     });
     console.log(result);
-    console.log('Hook result', result);
   };
 
   return (
