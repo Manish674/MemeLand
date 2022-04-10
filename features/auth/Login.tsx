@@ -11,12 +11,15 @@ const Login = () => {
 
   const handleOnChange = (e: any) => {
     setDetails({ ...userDetails, [e.target.name]: e.target.value });
+    console.log(userDetails);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async () => {
     const { email, password } = userDetails;
-    const token = localStorage.getItem('_t');
-    if (token) login({ email, password, token });
+    const token = localStorage.getItem('accessToken');
+    if (!token) return console.log('Token not found');
+    const res = await login({ email, password, token });
+    console.log(res);
   };
 
   return (
@@ -26,8 +29,13 @@ const Login = () => {
         onChange={(e) => handleOnChange(e)}
         placeholder="email"
       />
-      <input placeholder="password" typeof="password" />
-      <button onClick={(e) => handleSubmit(e)}>Submit</button>
+      <input
+        name="password"
+        onChange={(e) => handleOnChange(e)}
+        placeholder="password"
+        typeof="password"
+      />
+      <button onClick={() => handleSubmit()}>Submit</button>
     </div>
   );
 };

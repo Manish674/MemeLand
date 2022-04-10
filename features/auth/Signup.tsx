@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styles from '../../styles/Authpage.module.css';
 import { FC, useState } from 'react';
 import { useRegisterMutation } from './authApi';
@@ -20,13 +21,14 @@ const SignUp: FC = () => {
   const handleOnSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const { username, email, password } = user;
-    const result = await register({
+    const res = await register({
       username,
       email,
       password,
-      dateOfBirth: '02-03-1919',
+      dateOfBirth: '2005-09-01',
     });
-    console.log(result);
+    localStorage.setItem('refreshToken', res.data.refreshToken);
+    localStorage.setItem('accessToken', res.data.accessToken);
   };
 
   return (
