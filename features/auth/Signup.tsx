@@ -1,15 +1,14 @@
 import React from 'react';
-import axios from 'axios';
-import styles from '../../styles/Authpage.module.css';
 import { FC, useState } from 'react';
 import { useRegisterMutation } from './authApi';
+import { Button, Container, Heading, Input } from './auth.comp';
 
 const SignUp: FC = () => {
   const [user, setUser] = useState({
     username: 'manish',
     email: 'manishchoudhary4905@gmail.com',
     password: 'manish@495',
-    passwordConfirm: '',
+    confirmPassword: '',
   });
 
   const [register, result] = useRegisterMutation();
@@ -19,8 +18,18 @@ const SignUp: FC = () => {
   };
 
   const handleOnSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const { username, email, password } = user;
+    const { username, email, password, confirmPassword } = user;
+
+    if (!username || !email || !password || !confirmPassword) {
+      // make every border red
+      console.log('shit head provide all the valid details');
+    }
+
+    if (password !== confirmPassword) {
+      // make the border red of the input which is invalid
+      console.log("Password don't match idiot they're not same");
+    }
+
     const res = await register({
       username,
       email,
@@ -32,55 +41,33 @@ const SignUp: FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={(e) => handleOnSubmit(e)}>
-        <h3 className={styles.heading}>Sign Up</h3>
-        <div className={styles.inputWrapper}>
-          <input
-            className={`${styles.input}`}
-            name="username"
-            placeholder="username"
-            value={user.username}
-            onChange={(e) => handleOnChange(e)}
-            autoComplete="off"
-          />
-        </div>
-        <div className={styles.inputWrapper}>
-          <input
-            className={`${styles.input}`}
-            name="email"
-            placeholder="email"
-            value={user.email}
-            onChange={(e) => handleOnChange(e)}
-            autoComplete="off"
-          />
-        </div>
-        <div className={styles.inputWrapper}>
-          <input
-            className={`${styles.input}  `}
-            name="password"
-            placeholder="password"
-            value={user.password}
-            type="password"
-            onChange={(e) => handleOnChange(e)}
-            autoComplete="off"
-          />
-        </div>
-        <div className={styles.inputWrapper}>
-          <input
-            className={`${styles.input}
-            } `}
-            name="passwordConfirm"
-            placeholder="confirm password"
-            value={user.passwordConfirm}
-            type="password"
-            onChange={(e) => handleOnChange(e)}
-            autoComplete="off"
-          />
-        </div>
-        <button className={styles.primary_btn}>Sign Up</button>
-      </form>
-    </div>
+    <Container>
+      <Heading>Sign Up</Heading>
+      <Input
+        name="username"
+        onChange={(e) => handleOnChange(e)}
+        placeholder="username"
+      />
+      <Input
+        name="email"
+        onChange={(e) => handleOnChange(e)}
+        placeholder="email"
+        typeof="email"
+      />
+      <Input
+        name="password"
+        onChange={(e) => handleOnChange(e)}
+        placeholder="password"
+        typeof="password"
+      />
+      <Input
+        name="confirmPassword"
+        onChange={(e) => handleOnChange(e)}
+        placeholder="confirm password"
+        typeof="password"
+      />
+      <Button onSubmit={(e) => handleOnSubmit(e)}>Signup</Button>
+    </Container>
   );
 };
 

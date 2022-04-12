@@ -1,3 +1,4 @@
+import { Container, Input, Button, Heading } from './auth.comp';
 import React, { useState } from 'react';
 import { useLoginMutation } from './authApi';
 
@@ -23,20 +24,21 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <input
+    <Container>
+      <Heading>Login</Heading>
+      <Input
         name="email"
         onChange={(e) => handleOnChange(e)}
         placeholder="email"
       />
-      <input
+      <Input
         name="password"
         onChange={(e) => handleOnChange(e)}
         placeholder="password"
         typeof="password"
       />
-      <button onClick={() => handleSubmit()}>Submit</button>
-    </div>
+      <Button onClick={() => handleSubmit()}>Login</Button>
+    </Container>
   );
 };
 

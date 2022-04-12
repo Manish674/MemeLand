@@ -16,8 +16,8 @@ import { Login, SignUp } from '../features/auth/';
 const Home: NextPage = () => {
   return (
     <>
-      <Login />;
-      <SignUp />;
+      <Login />
+      <SignUp />
     </>
   );
   // const Router = useRouter();
