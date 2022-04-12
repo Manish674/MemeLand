@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
 export const Container = styled.div`
-  width: 40%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,4 +30,8 @@ export const Button = styled.button`
   border: none;
   border-radius: 0.2rem;
   background-color: #92cbf7;
+`;
+
+export const LinkButton = styled(Link)`
+  border: 2px solid white;
 `;

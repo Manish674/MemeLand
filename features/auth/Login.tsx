@@ -1,4 +1,4 @@
-import { Container, Input, Button, Heading } from './auth.comp';
+import { Container, Input, Button, Heading, LinkButton } from './auth.comp';
 import React, { useState } from 'react';
 import { useLoginMutation } from './authApi';
 
@@ -38,6 +38,7 @@ const Login = () => {
         typeof="password"
       />
       <Button onClick={() => handleSubmit()}>Login</Button>
+      <LinkButton href={'/signup'}>don't have account ? </LinkButton>
     </Container>
   );
 };

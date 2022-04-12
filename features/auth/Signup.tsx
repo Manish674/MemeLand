@@ -1,7 +1,7 @@
 import React from 'react';
 import { FC, useState } from 'react';
 import { useRegisterMutation } from './authApi';
-import { Button, Container, Heading, Input } from './auth.comp';
+import { Button, Container, Heading, Input, LinkButton } from './auth.comp';
 
 const SignUp: FC = () => {
   const [user, setUser] = useState({
@@ -67,6 +67,7 @@ const SignUp: FC = () => {
         typeof="password"
       />
       <Button onSubmit={(e) => handleOnSubmit(e)}>Signup</Button>
+      <LinkButton href={'/login'}>already have an account ?</LinkButton>
     </Container>
   );
 };
