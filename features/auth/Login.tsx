@@ -17,6 +17,7 @@ const Login = () => {
 
   const handleSubmit = async () => {
     const { email, password } = userDetails;
+    
     const token = localStorage.getItem('accessToken');
     if (!token) return console.log('Token not found');
     const res = await login({ email, password, token });

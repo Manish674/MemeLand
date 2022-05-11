@@ -7,6 +7,7 @@ type UserDetails = {
   pfp: string;
 };
 
+
 type AppAuthContext = {
   login: (email: string, password: string) => Promise<any>;
   logout: () => void;
