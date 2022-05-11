@@ -1,8 +1,17 @@
-import { Container, Input, Button, Heading, LinkButton } from './auth.comp';
+import {
+  Form,
+  Container,
+  Input,
+  Button,
+  Heading,
+  LinkButton,
+} from './auth.comp';
 import React, { useState } from 'react';
 import { useLoginMutation } from './authApi';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const router = useRouter();
   const [userDetails, setDetails] = useState({
     email: '',
     password: '',
@@ -12,34 +21,43 @@ const Login = () => {
 
   const handleOnChange = (e: any) => {
     setDetails({ ...userDetails, [e.target.name]: e.target.value });
-    console.log(userDetails);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     const { email, password } = userDetails;
-    
+
+    if (!email || !password) {
+      return alert('Info incomplete');
+    }
+
     const token = localStorage.getItem('accessToken');
     if (!token) return console.log('Token not found');
+
     const res = await login({ email, password, token });
-    console.log(res);
+
+    if (!res.data.success) return alert(res.data.message);
+    router.push('/');
   };
 
   return (
     <Container>
-      <Heading>Login</Heading>
-      <Input
-        name="email"
-        onChange={(e) => handleOnChange(e)}
-        placeholder="email"
-      />
-      <Input
-        name="password"
-        onChange={(e) => handleOnChange(e)}
-        placeholder="password"
-        typeof="password"
-      />
-      <Button onClick={() => handleSubmit()}>Login</Button>
-      <LinkButton href={'/signup'}>don't have account ? </LinkButton>
+      <Form onSubmit={(e) => handleSubmit(e)}>
+        <Heading>Login</Heading>
+        <Input
+          name="email"
+          onChange={(e) => handleOnChange(e)}
+          placeholder="email"
+        />
+        <Input
+          name="password"
+          onChange={(e) => handleOnChange(e)}
+          placeholder="password"
+          typeof="password"
+        />
+        <Button onClick={(e) => handleSubmit(e)}>Login</Button>
+        <LinkButton href={'/signup'}>don't have account ? </LinkButton>
+      </Form>
     </Container>
   );
 };

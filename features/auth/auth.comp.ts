@@ -3,6 +3,10 @@ import Link from 'next/link';
 
 export const Container = styled.div`
   width: 100%;
+`;
+
+export const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
