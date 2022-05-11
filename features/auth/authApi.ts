@@ -19,6 +19,7 @@ export const authApi = createApi({
         ? 'http://localhost:8000/api/v1/auth/'
         : `${process.env.NEXT_PUBLIC_URI}/api/v1/auth/`,
   }),
+
   endpoints: (builder) => ({
     login: builder.mutation<void, Login>({
       // Data is the args given to the useMutationLogin hook
@@ -41,7 +42,6 @@ export const authApi = createApi({
     register: builder.mutation<any, Omit<Register, 'token'>>({
       query(data) {
         return {
-          Headers,
           method: 'POST',
           url: '/register',
           body: {
@@ -53,7 +53,19 @@ export const authApi = createApi({
         };
       },
     }),
+
+    validate: builder.query<void, string>({
+      query(token) {
+        return {
+          url: '/validate',
+          headers: {
+            authentication: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useValidateQuery } =
+  authApi;

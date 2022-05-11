@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useRegisterMutation } from './authApi';
@@ -13,6 +13,14 @@ import {
 
 const SignUp: FC = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      router.push('/');
+    }
+  }, []);
+
   const [user, setUser] = useState({
     username: 'manish',
     email: 'manishchoudhary4905@gmail.com',
@@ -62,24 +70,28 @@ const SignUp: FC = () => {
         <Input
           name="username"
           onChange={(e) => handleOnChange(e)}
+          value={user.username}
           placeholder="username"
         />
         <Input
           name="email"
           onChange={(e) => handleOnChange(e)}
           placeholder="email"
+          value={user.email}
           typeof="email"
         />
         <Input
           name="password"
           onChange={(e) => handleOnChange(e)}
           placeholder="password"
+          value={user.password}
           typeof="password"
         />
         <Input
           name="confirmPassword"
           onChange={(e) => handleOnChange(e)}
           placeholder="confirm password"
+          value={user.confirmPassword}
           typeof="password"
         />
         <Button typeof="submit" onSubmit={(e) => handleOnSubmit(e)}>
