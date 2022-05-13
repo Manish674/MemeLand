@@ -1,29 +1,34 @@
-import axios from './axios';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useValidateQuery } from '../features/auth/authApi';
 
 const withAuth = (WrappedComponent: any) => {
   return (props: any) => {
-    const [verified, setVerified] = useState<boolean | null>(null);
-    const Router = useRouter();
+    const [token, setToken] = useState<string | null>(null);
+    const [skip, setSkip] = useState<boolean>(false);
 
     //TODO find how to use validate query function
     useEffect(() => {
       const token = localStorage.getItem('accessToken');
-      if (!token) Router.push('/signup');
-      verification(token);
-      if (verified === false) {
-        Router.push('/login');
-      }
-    }, [verified]);
+      setToken(token);
+    }, []);
 
+    const { data, isLoading, error } = useValidateQuery(token, {
+      skip: token ? false : true,
+    });
 
-    async function verification(token: string | null) {
-      if (!token) return Router.push('/signup');
-    }
+    console.log(data);
 
-    return <WrappedComponent {...props} />;
+    return (
+      <>
+        {isLoading ? (
+          <div>loading....</div>
+        ) : data ? (
+          <WrappedComponent {...props} />
+        ) : (
+          <div>Something went really really wrong</div>
+        )}
+      </>
+    );
   };
 };
 
