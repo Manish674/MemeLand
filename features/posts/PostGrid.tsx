@@ -5,13 +5,13 @@ import { useGetPostsQuery } from './postApi';
 import Post from './Post';
 
 const Posts = () => {
-  const token = localStorage.getItem('_t');
+  const token = localStorage.getItem('accessToken');
 
   if (token === null) return <div>You are not authorize</div>;
 
   const { data, error, isLoading } = useGetPostsQuery(token);
-
   console.log(data);
+
   return <div>Hello world</div>;
   // if (isLoading) {
   //   return <div>..........loading</div>;

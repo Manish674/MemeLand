@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../styles/post.module.css';
 import Profile from '../../components/Profile';
 import Modal from './PostModals';
-// import EditModal from '../components/EditModal';
 
 const Post = (props: any) => {
   const [loggedUser, setLoggedUser] = useState<string>('');
@@ -16,9 +15,6 @@ const Post = (props: any) => {
   const [open, setIsOpen] = useState<boolean>(false);
   const displayValue = open ? '' : 'none';
 
-  // for edit modal
-  // const [isHidden, setIsHidden] = useState(true);
-  // for delete Modal
   const [isModalHidden, setIsModalHidden] = useState<{
     visible: boolean;
     mode: 'Edit' | 'Delete' | '';
@@ -48,13 +44,6 @@ const Post = (props: any) => {
         isModalHidden={isModalHidden}
         setIsModalHidden={setIsModalHidden}
       />
-      {/* <EditModal */}
-      {/*   isHidden={isHidden} */}
-      {/*   setIsHidden={setIsHidden} */}
-      {/*   postId={props._id} */}
-      {/*   postTitle={title} */}
-      {/*   postImg={mediaUrl} */}
-      {/* /> */}
       <div className={styles.container}>
         <div className={styles.header}>
           <Profile postedBy={postedBy} />

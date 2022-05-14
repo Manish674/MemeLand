@@ -54,6 +54,7 @@ export const authApi = createApi({
       },
     }),
 
+    // TODO should you change it to post instead of get ?
     validate: builder.query<void, string>({
       query(token) {
         return {
@@ -64,8 +65,24 @@ export const authApi = createApi({
         };
       },
     }),
+
+    refreshAccessToken: builder.mutation<void, string>({
+      query(refreshToken) {
+        return {
+          url: '/refresh-access-token',
+          method: 'POST',
+          headers: {
+            authentication: `Bearer ${refreshToken}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useValidateQuery } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useValidateQuery,
+  useRefreshAccessTokenMutation,
+} = authApi;
