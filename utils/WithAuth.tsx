@@ -33,7 +33,6 @@ const withAuth = (WrappedComponent: any) => {
       return;
     }
 
-    console.log(data);
 
     return (
       <>

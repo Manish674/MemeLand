@@ -3,32 +3,44 @@ import { useGetPostsQuery } from './postApi';
 
 // import axios from '../utils/axios';
 import Post from './Post';
+import { useRouter } from 'next/router';
 
 const Posts = () => {
-  const token = localStorage.getItem('accessToken');
+  const [token, setToken] = useState('');
+  const router = useRouter();
 
-  if (token === null) return <div>You are not authorize</div>;
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      setToken(token);
+    }
+
+    if (!token) {
+      router.push('/login');
+    }
+  }, []);
 
   const { data, error, isLoading } = useGetPostsQuery(token);
-  console.log(data);
 
-  return <div>Hello world</div>;
-  // if (isLoading) {
-  //   return <div>..........loading</div>;
-  // } else if (data) {
-  //   return (
-  //     <div style={{ marginBottom: '84px' }}>
-  //       {data.posts.length > 0
-  //         ? data.posts.map((props: any) => <Post key={props._id} {...props} />)
-  //         : 'no imgs for now'}
-  //     </div>
-  //   );
-  // } else if (error) {
-  //   console.log(error);
-  //   return <div>something went wrong</div>;
-  // } else {
-  //   return <div>Exception</div>;
-  // }
+  return (
+    <div>
+      {error ? (
+        <>Oh no, there was an error</>
+      ) : isLoading ? (
+        <>Loading...</>
+      ) : data ? (
+        <div style={{ marginBottom: '84px' }}>
+          {data.posts.length > 0
+            ? data.posts.map((props: any) => (
+                <Post key={props._id} {...props} />
+              ))
+            : 'no imgs for now'}
+        </div>
+      ) : (
+        <div>Something went wrong</div>
+      )}
+    </div>
+  );
 };
 
 export default Posts;
