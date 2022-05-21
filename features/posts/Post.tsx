@@ -4,6 +4,7 @@ import Profile from '../../components/Profile';
 import Modal from './PostModals';
 
 const Post = (props: any) => {
+  console.log(props);
   const [loggedUser, setLoggedUser] = useState<string>('');
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Post = (props: any) => {
       <div className={styles.container}>
         <div className={styles.header}>
           <Profile postedBy={postedBy} />
-          {loggedUser === postedBy.username && (
+          {loggedUser === postedBy?.username && (
             <div className={styles.menu}>
               <span
                 className={styles.dropdownButton}

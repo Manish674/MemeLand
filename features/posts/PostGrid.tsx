@@ -30,7 +30,7 @@ const Posts = () => {
         <>Loading...</>
       ) : data ? (
         <div style={{ marginBottom: '84px' }}>
-          {data.posts.length > 0
+          {data?.posts?.length > 0
             ? data.posts.map((props: any) => (
                 <Post key={props._id} {...props} />
               ))

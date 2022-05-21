@@ -39,7 +39,7 @@ const Modal = (props: Modal) => {
   return (
     <div
       className={styles.container}
-      style={{ display: `${props.isModalHidden.visible ? 'none' : ''}` }}
+      style={{ display: `${!props.isModalHidden.visible ? 'none' : ''}` }}
     >
       <h4>{props.isModalHidden.mode} Post</h4>
       <div className={styles.wrapper}>

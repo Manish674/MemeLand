@@ -11,6 +11,7 @@ const Home = ({ data, refreshToken }: any) => {
   useEffect(() => {
     const updateAccessToken = async (token: string) => {
       const res = await trigger(token);
+      console.log(res);
       if (res.data.success) {
         localStorage.removeItem('accessToken');
         localStorage.setItem('accessToken', res.data.accessToken);

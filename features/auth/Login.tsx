@@ -37,6 +37,7 @@ const Login = () => {
     const res = await login({ email, password, token });
 
     if (!res.data.success) return alert(res.data.message);
+    localStorage.setItem('isAuth', 'true');
     router.push('/');
   };
 

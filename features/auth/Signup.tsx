@@ -16,7 +16,8 @@ const SignUp: FC = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
-    if (token) {
+
+    if (localStorage.isAuth === 'true') {
       router.push('/');
     }
   }, []);
@@ -55,12 +56,15 @@ const SignUp: FC = () => {
       dateOfBirth: '2005-09-01',
     });
 
-    if (!res.data.success) {
+    console.log(res);
+    if (!res?.data.success) {
       return alert(res.data.message);
     }
 
     localStorage.setItem('refreshToken', res.data.refreshToken);
     localStorage.setItem('accessToken', res.data.accessToken);
+    localStorage.setItem('isAuth', '');
+    router.push('/login');
   };
 
   return (

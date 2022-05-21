@@ -28,11 +28,21 @@ const withAuth = (WrappedComponent: any) => {
       skip: token ? false : true,
     });
 
+    if (data && data.success === false) {
+      localStorage.setItem('isAuth', 'false');
+      router.push('/login');
+    }
+
+    if (data && data.user) {
+      const { email, username } = data.user;
+      localStorage.setItem('loggedUser', username);
+      localStorage.setItem('loggedEmail', email);
+    }
+
     if (error) {
       router.push('/login');
       return;
     }
-
 
     return (
       <>
