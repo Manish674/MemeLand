@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useCreatePostMutation } from '../utils/features/posts/postSlice';
+import { useCreatePostMutation } from '../features/posts/postApi';
 import styles from '../styles/createpost.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
