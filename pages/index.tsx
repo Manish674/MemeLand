@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useRefreshAccessTokenMutation } from '../features/auth/authApi';
 import PostGrid from '../features/posts';
+import Layout from '../components/Layout';
 import WithAuth from '../utils/WithAuth';
 
 const Home = ({ data, refreshToken }: any) => {
@@ -11,7 +12,6 @@ const Home = ({ data, refreshToken }: any) => {
   useEffect(() => {
     const updateAccessToken = async (token: string) => {
       const res = await trigger(token);
-      console.log(res);
       if (res.data.success) {
         localStorage.removeItem('accessToken');
         localStorage.setItem('accessToken', res.data.accessToken);
@@ -24,9 +24,9 @@ const Home = ({ data, refreshToken }: any) => {
   }, []);
 
   return (
-    <div>
+    <Layout>
       <PostGrid />
-    </div>
+    </Layout>
   );
 };
 export default WithAuth(Home);

@@ -4,6 +4,8 @@ import Sidebar from '../components/Sidebar';
 import styles from '../styles/profile.module.css';
 import axios from '../utils/axios';
 import DefaultProfile from '../public/defaultProfile.jpg';
+import { useGetCurrentUserProfileQuery } from '../features/profile/profileApi';
+import WithAuth from '../utils/WithAuth';
 
 type Details = {
   username: string;
@@ -13,57 +15,62 @@ type Details = {
 };
 
 const Profile = () => {
-  const [details, setDetails] = useState<Details>();
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('_t');
-    fetchMySelf(token);
+    const token = localStorage.getItem('accessToken');
+    setToken(token);
   }, []);
 
-  const fetchMySelf = async (token: any) => {
-    const { data } = await axios({
-      method: 'GET',
-      url: '/user/profile',
-      headers: {
-        authentication: `Bearer ${token}`,
-      },
-    });
-    setDetails(data.result[0]);
-  };
+  const { data, isLoading, error } = useGetCurrentUserProfileQuery(token, {
+    skip: token !== null ? false : true,
+  });
+
+  const [details, setDetails] = useState<Details>();
 
   return (
-    <div className={styles.container}>
-      <Sidebar />
-      <div className={styles.profileContainer}>
-        <div className={styles.profile}>
-          <img
-            className={styles.pfp}
-            src={details?.pfp ? details.pfp : DefaultProfile.src}
-          />
-          <div>
-            <div className={styles.text}>
-              <h2>{details?.username}</h2>
+    <>
+      {isLoading ? (
+        <div>loading....</div>
+      ) : data ? (
+        <div className={styles.container}>
+          <Sidebar />
+          <div className={styles.profileContainer}>
+            <div className={styles.profile}>
+              <img
+                className={styles.pfp}
+                src={
+                  data.result[0]?.pfp ? data.result[0].pfp : DefaultProfile.src
+                }
+              />
+              <div>
+                <div className={styles.text}>
+                  <h2>{data.result[0]?.username}</h2>
+                </div>
+                <input
+                  type="file"
+                  name="uploadfile"
+                  id="img"
+                  style={{ display: 'none' }}
+                />
+                {/* add upload logo here */}
+                <label htmlFor="img" className={styles.uploadLabel}>
+                  upload pfp
+                </label>
+              </div>
             </div>
-            <input
-              type="file"
-              name="uploadfile"
-              id="img"
-              style={{ display: 'none' }}
-            />
-            {/* add upload logo here */}
-            <label htmlFor="img" className={styles.uploadLabel}>
-              upload pfp
-            </label>
+            <div className={styles.postGrid}>
+              {data.result[0]?.posts.map((el: any) => (
+                <img className={styles.img} src={el.mediaUrl} key={el._id} />
+              ))}
+            </div>
           </div>
         </div>
-        <div className={styles.postGrid}>
-          {details?.posts.map((el: any) => (
-            <img className={styles.img} src={el.mediaUrl} key={el._id} />
-          ))}
-        </div>
-      </div>
-    </div>
+      ) : (
+        <div>Something went really really wrong</div>
+      )}
+    </>
   );
 };
 
-export default Profile;
+export default WithAuth(Profile);

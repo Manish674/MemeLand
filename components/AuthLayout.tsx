@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import titleImg from '../public/title.png';
 import headerImgLg from '../public/headerImgLGScreen.png';
-import headerImgSm from '../public/headerImg.png';
+// import headerImgSm from '../public/headerImg.png';
 
 interface Layout {
   // TODO -> check if this is right or not

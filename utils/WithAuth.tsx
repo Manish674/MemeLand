@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import {
-  useValidateQuery,
-  useRefreshAccessTokenMutation,
-} from '../features/auth/authApi';
+import { useValidateQuery } from '../features/auth/authApi';
 
 const withAuth = (WrappedComponent: any) => {
   return (props: any) => {

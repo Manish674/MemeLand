@@ -56,7 +56,6 @@ const SignUp: FC = () => {
       dateOfBirth: '2005-09-01',
     });
 
-    console.log(res);
     if (!res?.data.success) {
       return alert(res.data.message);
     }

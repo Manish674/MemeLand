@@ -4,11 +4,10 @@ import Profile from '../../components/Profile';
 import Modal from './PostModals';
 
 const Post = (props: any) => {
-  console.log(props);
   const [loggedUser, setLoggedUser] = useState<string>('');
 
   useEffect(() => {
-    const user = localStorage.getItem('username');
+    const user = localStorage.getItem('loggedUser');
     setLoggedUser(user ? user : '');
   }, []);
 
@@ -36,6 +35,8 @@ const Post = (props: any) => {
     }
   };
 
+  console.log('posted By user.............', postedBy);
+  console.log('logged User................', loggedUser);
   return (
     <>
       <Modal

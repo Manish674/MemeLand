@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useGetPostsQuery } from './postApi';
+import styles from "../../styles/post.module.css";
 
 // import axios from '../utils/axios';
 import Post from './Post';
@@ -23,7 +24,7 @@ const Posts = () => {
   const { data, error, isLoading } = useGetPostsQuery(token);
 
   return (
-    <div>
+    <div className={styles.postContainer}>
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (

@@ -3,16 +3,15 @@ import React from 'react';
 import styles from '../styles/createpost.module.css';
 
 import CreatePost from '../components/CreatePost';
-import Sidebar from '../components/Sidebar';
+import Layout from '../components/Layout';
 
 const createpost = () => {
   return (
-    <div className={styles.mainContainer}>
-      <Sidebar />
+    <Layout>
       <div className={styles.createPostWrapper}>
         <CreatePost />
       </div>
-    </div>
+    </Layout>
   );
 };
 

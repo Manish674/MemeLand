@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { useCreatePostMutation } from '../utils/features/posts/postSlice';
 import styles from '../styles/createpost.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreatePost = () => {
   const [createPost, result] = useCreatePostMutation();
@@ -45,13 +47,29 @@ const CreatePost = () => {
     data.append('file', postDetails.img.file);
     data.append('title', postDetails.title);
 
-    const token = localStorage.getItem('_t');
+    const token = localStorage.getItem('accessToken');
     if (token === null) return 'TOKEN NOT FOUND';
-    createPost({ data, token: token });
+    const res = await createPost({ data, token: token });
+
+    if (res.data) {
+      toast(res.data?.message);
+      handleOnCancelClick();
+    }
+  };
+
+  const handleOnCancelClick = () => {
+    setPostDetails({
+      title: '',
+      img: {
+        file: null,
+        preview: '',
+      },
+    });
   };
 
   return (
     <div className={styles.container}>
+      <ToastContainer />
       <h4>Create new post</h4>
       <div className={styles.wrapper}>
         <form className={styles.form} onSubmit={(e) => handleOnSubmit(e)}>
@@ -84,7 +102,16 @@ const CreatePost = () => {
             {/* </div> */}
           </div>
           <div className={styles.button_wrapper}>
-            <button className={styles.post_button}>Post</button>
+            <button className={styles.post_button} type="submit">
+              Post
+            </button>
+            <button
+              className={styles.post_button}
+              type="reset"
+              onClick={() => handleOnCancelClick()}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>

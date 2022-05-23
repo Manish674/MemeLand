@@ -27,7 +27,7 @@ const Sidebar = () => {
         </div>
         <div className={styles.navigation}>
           <div className={styles.navWrapper}>
-            <Link href="/home" passHref={true}>
+            <Link href="/" passHref={true}>
               <div className={styles.linkItemWrapper}>
                 <AiOutlineHome className={styles.linkIcon} />
                 <span className={styles.linkTxt}>Home</span>

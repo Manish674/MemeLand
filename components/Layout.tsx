@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Sidebar from './Sidebar';
 
 interface Layout {
   // TODO -> check if this is right or not
@@ -11,7 +12,6 @@ const LayoutContainer = styled.div`
 
 const ChildWrapper = styled.div`
   width: 100%;
-  border: 2px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +20,7 @@ const ChildWrapper = styled.div`
 const Layout = (props: Layout) => {
   return (
     <LayoutContainer>
+      <Sidebar />
       <ChildWrapper>{props.children}</ChildWrapper>
     </LayoutContainer>
   );

@@ -33,7 +33,10 @@ const Modal = (props: Modal) => {
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
-    deletePost(props.postId);
+    const res = deletePost(props.postId);
+    if (res.data && res.data.success) {
+      props.setIsModalHidden({ ...props.isModalHidden, visible: false });
+    }
   };
 
   return (
@@ -65,10 +68,11 @@ const Modal = (props: Modal) => {
 
             <button
               className={styles.post_button}
+              type="reset"
               onClick={() =>
                 props.setIsModalHidden({
                   ...props.isModalHidden,
-                  visible: true,
+                  visible: false,
                 })
               }
             >

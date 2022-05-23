@@ -1,3 +1,10 @@
+.postContainer {
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
 .container {
   width: 60%;
   /*remove it later */
@@ -12,6 +19,7 @@
   /* padding: 0.5rem; */
   border-radius: 20px;
   gap: 0.5rem;
+  max-width: 759.594px;
 }
 
 .header {
