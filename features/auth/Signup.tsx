@@ -23,9 +23,9 @@ const SignUp: FC = () => {
   }, []);
 
   const [user, setUser] = useState({
-    username: 'manish',
-    email: 'manishchoudhary4905@gmail.com',
-    password: 'manish@495',
+    username: '',
+    email: '',
+    password: '',
     confirmPassword: '',
   });
 

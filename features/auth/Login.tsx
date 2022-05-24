@@ -32,6 +32,7 @@ const Login = () => {
     }
 
     const token = localStorage.getItem('accessToken');
+    console.log(token);
     if (!token) return console.log('Token not found');
 
     const res: any = await login({ email, password, token });
