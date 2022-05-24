@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import titleImg from '../public/title.png';
 import headerImgLg from '../public/headerImgLGScreen.png';
