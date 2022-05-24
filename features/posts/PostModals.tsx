@@ -33,7 +33,7 @@ const Modal = (props: Modal) => {
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
-    const res = deletePost(props.postId);
+    const res: any = deletePost(props.postId);
     if (res.data && res.data.success) {
       props.setIsModalHidden({ ...props.isModalHidden, visible: false });
     }

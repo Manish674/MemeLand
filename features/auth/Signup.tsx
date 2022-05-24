@@ -49,7 +49,7 @@ const SignUp: FC = () => {
       console.log("Password don't match idiot they're not same");
     }
 
-    const res = await register({
+    const res: any = await register({
       username,
       email,
       password,

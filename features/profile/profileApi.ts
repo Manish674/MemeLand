@@ -15,7 +15,7 @@ export const profileApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    getCurrentUserProfile: builder.query<void, string>({
+    getCurrentUserProfile: builder.query<any, string>({
       query(token) {
         return {
           url: '/',
@@ -26,7 +26,7 @@ export const profileApi = createApi({
       },
     }),
 
-    getUserProfile: builder.query<void, GetUserProfile>({
+    getUserProfile: builder.query<any, GetUserProfile>({
       query(data) {
         return {
           url: `/${data.id}`,

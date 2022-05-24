@@ -1,10 +1,11 @@
+import React from "react";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useValidateQuery } from '../features/auth/authApi';
 
 const withAuth = (WrappedComponent: any) => {
   return (props: any) => {
-    const [token, setToken] = useState<string | null>(null);
+    const [token, setToken] = useState<string>('');
     const [refreshToken, setRefreshToken] = useState<string | null>(null);
     const router = useRouter();
 
@@ -17,7 +18,7 @@ const withAuth = (WrappedComponent: any) => {
         router.push('/login');
       }
 
-      setToken(token);
+      if (token) setToken(token);
       setRefreshToken(refreshToken);
     }, []);
 

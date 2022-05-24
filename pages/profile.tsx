@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import styles from '../styles/profile.module.css';
-import axios from '../utils/axios';
 import DefaultProfile from '../public/defaultProfile.jpg';
 import { useGetCurrentUserProfileQuery } from '../features/profile/profileApi';
 import WithAuth from '../utils/WithAuth';
@@ -15,11 +14,11 @@ type Details = {
 };
 
 const Profile = () => {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string>('');
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
-    setToken(token);
+    if (token) setToken(token);
   }, []);
 
   const { data, isLoading, error } = useGetCurrentUserProfileQuery(token, {

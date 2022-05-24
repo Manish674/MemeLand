@@ -49,7 +49,7 @@ const CreatePost = () => {
 
     const token = localStorage.getItem('accessToken');
     if (token === null) return 'TOKEN NOT FOUND';
-    const res = await createPost({ data, token: token });
+    const res: any = await createPost({ data, token: token });
 
     if (res.data) {
       toast(res.data?.message);

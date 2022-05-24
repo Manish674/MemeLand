@@ -11,6 +11,10 @@ interface Register extends Login {
   dateOfBirth: string;
 }
 
+type Response = Promise<{
+  data: any;
+}>;
+
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
@@ -21,7 +25,7 @@ export const authApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    login: builder.mutation<void, Login>({
+    login: builder.mutation<any, Login>({
       // Data is the args given to the useMutationLogin hook
       // in this case data is { email, password, token }
       query(data) {
@@ -55,7 +59,7 @@ export const authApi = createApi({
     }),
 
     // TODO should you change it to post instead of get ?
-    validate: builder.query<void, string>({
+    validate: builder.query<any, string>({
       query(token) {
         return {
           url: '/validate',
